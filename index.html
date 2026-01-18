@@ -7,71 +7,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* RESET Y ESTILOS GENERALES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #ffb6c1, #ffc0cb); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; color: #8b5a7c; }
+        .hearts-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+        .heart { position: absolute; color: rgba(255, 105, 180, 0.4); font-size: 20px; animation: float 8s linear infinite; opacity: 0.5; }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
+        .container { width: 100%; max-width: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        /* PANTALLA DE ESPERA (ANTES DEL 15/02/26) */
+        .waiting-screen {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            box-shadow: 0 15px 30px rgba(214, 51, 132, 0.2);
+            border: 3px solid #ffafcc;
+            text-align: center;
+            display: none;
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #8b5a7c;
-        }
-
-        /* CORAZONES SUAVES EN FONDO */
-        .hearts-bg {
-            position: fixed;
+        .waiting-screen::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ffafcc, #ffc2d1);
+            border-radius: 20px 20px 0 0;
         }
-
-        .heart {
-            position: absolute;
-            color: rgba(255, 105, 180, 0.4);
-            font-size: 20px;
-            animation: float 8s linear infinite;
-            opacity: 0.5;
+        .lock-icon {
+            font-size: 4rem;
+            color: #ff66a3;
+            margin-bottom: 20px;
         }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
+        .date-display {
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #ffc2d1;
         }
-
-        /* CONTENEDOR PRINCIPAL CENTRADO */
-        .container {
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .date-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff66a3;
         }
-
-        /* TARJETA DE LOGIN */
+        .date-label {
+            color: #b76e9a;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        
+        /* LOGIN CARD (DESPUÉS DEL 15/02/26) */
         .login-card {
             background: white;
             border-radius: 20px;
@@ -81,8 +68,8 @@
             border: 3px solid #ffafcc;
             text-align: center;
             margin-bottom: 20px;
+            display: none;
         }
-
         .login-card::before {
             content: '';
             position: absolute;
@@ -93,311 +80,101 @@
             background: linear-gradient(90deg, #ffafcc, #ffc2d1);
             border-radius: 20px 20px 0 0;
         }
-
-        .main-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            color: #ff66a3;
-            margin-bottom: 15px;
-        }
-
-        .subtitle {
-            color: #b76e9a;
-            font-size: 1rem;
-            margin-bottom: 25px;
-        }
-
-        /* INPUT DE NOMBRE */
-        .input-group {
-            margin: 25px 0;
-        }
-
-        .input-label {
-            display: block;
-            color: #ff66a3;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .name-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #ffc2d1;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s;
-            background: #fff9fb;
-        }
-
-        .name-input:focus {
-            border-color = '#ff66a3';
-            box-shadow: 0 0 0 3px rgba(255, 102, 163, 0.2);
-        }
-
-        /* BOTÓN */
-        .continue-btn {
-            background: linear-gradient(135deg, #ff66a3, #ff8fab);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            margin-top: 10px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .continue-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.3);
-        }
-
-        /* MENSAJE DE ERROR */
-        .error-msg {
-            color: #ff3333;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            min-height: 20px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
+        .main-title { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff66a3; margin-bottom: 15px; }
+        .subtitle { color: #b76e9a; font-size: 1rem; margin-bottom: 25px; }
+        .input-group { margin: 25px 0; }
+        .input-label { display: block; color: #ff66a3; font-weight: 600; margin-bottom: 10px; font-size: 1.1rem; }
+        .name-input { width: 100%; padding: 15px; border: 2px solid #ffc2d1; border-radius: 12px; font-size: 1.1rem; text-align: center; outline: none; transition: all 0.3s; background: #fff9fb; }
+        .name-input:focus { border-color: #ff66a3; box-shadow: 0 0 0 3px rgba(255, 102, 163, 0.2); }
+        .continue-btn { background: linear-gradient(135deg, #ff66a3, #ff8fab); color: white; border: none; border-radius: 12px; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 10px; font-family: 'Poppins', sans-serif; }
+        .continue-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 102, 163, 0.3); }
+        .error-msg { color: #ff3333; margin-top: 15px; font-size: 0.9rem; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
+        
         /* CONTENIDO PRINCIPAL */
-        .main-content {
-            display: none;
-            width: 100%;
-            animation: fadeIn 1s;
-            text-align: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* ENCABEZADO DEL CONTENIDO */
-        .content-header {
-            margin-bottom: 25px;
-        }
-
-        .content-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            color: #ff66a3;
-            margin-bottom: 10px;
-        }
-
-        /* CONTADOR SIMPLE */
-        .simple-counter {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border: 2px solid #ffafcc;
-        }
-
-        .counter-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
-            color: #ff66a3;
-            margin-bottom: 15px;
-        }
-
-        .counter-number {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #ff66a3;
-            margin: 10px 0;
-        }
-
-        .counter-label {
-            font-size: 1.5rem;
-            color: #b76e9a;
-        }
-
-        /* CARTA */
-        .letter-closed {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            border: 2px solid #ffafcc;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .letter-closed:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .letter-seal {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #ff66a3, #ff8fab);
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            border: 3px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .letter-instruction {
-            color: #b76e9a;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        /* CARTA ABIERTA */
-        .letter-opened {
-            display: none;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            border: 2px solid #ffafcc;
-            animation: openLetter 0.8s;
-            text-align: left;
-        }
-
-        @keyframes openLetter {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .letter-content {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #5a3d5c;
-        }
-
-        .letter-content p {
-            margin-bottom: 18px;
-            padding-left: 15px;
-            border-left: 3px solid #ffc2d1;
-        }
-
-        .letter-signature {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            text-align: right;
-            color: #ff66a3;
-            margin-top: 25px;
-        }
-
-        /* MENSAJE FINAL ESPECIAL */
-        .final-special {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border: 2px solid #ffafcc;
-            text-align: center;
-        }
-
-        .love-message {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: #ff66a3;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .special-text {
-            font-size: 1.3rem;
-            color: #8b5a7c;
-            margin: 15px 0;
-            padding: 10px;
-            background: #fff5f7;
-            border-radius: 10px;
-            border-left: 4px solid #ff66a3;
-        }
-
-        .heart-btn {
-            background: linear-gradient(135deg, #ff66a3, #ff8fab);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            margin-top: 15px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .heart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.4);
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #b76e9a;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        /* ANIMACIÓN DE VIBRACIÓN */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        /* RESPONSIVE */
+        .main-content { display: none; width: 100%; animation: fadeIn 1s; text-align: center; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .content-header { margin-bottom: 25px; }
+        .content-title { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff66a3; margin-bottom: 10px; }
+        .simple-counter { background: white; border-radius: 15px; padding: 25px; margin: 20px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #ffafcc; }
+        .counter-title { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ff66a3; margin-bottom: 15px; }
+        .counter-number { font-size: 4rem; font-weight: 700; color: #ff66a3; margin: 10px 0; }
+        .counter-label { font-size: 1.5rem; color: #b76e9a; }
+        .letter-closed { background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 2px solid #ffafcc; cursor: pointer; transition: all 0.3s; }
+        .letter-closed:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .letter-seal { width: 70px; height: 70px; background: linear-gradient(135deg, #ff66a3, #ff8fab); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .letter-instruction { color: #b76e9a; margin-top: 10px; font-size: 0.9rem; }
+        .letter-opened { display: none; background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 2px solid #ffafcc; animation: openLetter 0.8s; text-align: left; }
+        @keyframes openLetter { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .letter-content { font-size: 1.1rem; line-height: 1.7; color: #5a3d5c; }
+        .letter-content p { margin-bottom: 18px; padding-left: 15px; border-left: 3px solid #ffc2d1; }
+        .letter-signature { font-family: 'Dancing Script', cursive; font-size: 2rem; text-align: right; color: #ff66a3; margin-top: 25px; }
+        .final-special { background: white; border-radius: 15px; padding: 25px; margin: 25px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #ffafcc; text-align: center; }
+        .love-message { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff66a3; margin-bottom: 15px; line-height: 1.3; }
+        .special-text { font-size: 1.3rem; color: #8b5a7c; margin: 15px 0; padding: 10px; background: #fff5f7; border-radius: 10px; border-left: 4px solid #ff66a3; }
+        .heart-btn { background: linear-gradient(135deg, #ff66a3, #ff8fab); color: white; border: none; border-radius: 12px; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 15px; font-family: 'Poppins', sans-serif; }
+        .heart-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 102, 163, 0.4); }
+        footer { text-align: center; padding: 20px; color: #b76e9a; font-size: 0.9rem; margin-top: 10px; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         @media (max-width: 480px) {
-            .login-card {
-                padding: 30px 20px;
-            }
-            
-            .main-title {
-                font-size: 2.3rem;
-            }
-            
-            .content-title {
-                font-size: 2.3rem;
-            }
-            
-            .counter-number {
-                font-size: 3.2rem;
-            }
-            
-            .love-message {
-                font-size: 2rem;
-            }
-            
-            .special-text {
-                font-size: 1.1rem;
-            }
+            .login-card, .waiting-screen { padding: 30px 20px; }
+            .main-title, .content-title { font-size: 2.3rem; }
+            .counter-number { font-size: 3.2rem; }
+            .love-message { font-size: 2rem; }
+            .special-text { font-size: 1.1rem; }
+            .lock-icon { font-size: 3rem; }
+            .date-number { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Fondo con corazones suaves -->
     <div class="hearts-bg" id="heartsBg"></div>
-
-    <!-- Contenedor principal centrado -->
     <div class="container">
-        <!-- Tarjeta de acceso -->
+        <!-- PANTALLA DE ESPERA (ANTES DEL 15/02/26) -->
+        <div class="waiting-screen" id="waitingScreen">
+            <div class="lock-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h1 class="main-title">Próximamente...</h1>
+            <p class="subtitle">Esta sorpresa especial se desbloqueará en una fecha muy importante</p>
+            
+            <div class="date-display">
+                <div class="date-number">15</div>
+                <div class="date-label">DE FEBRERO 2026</div>
+            </div>
+            
+            <div style="margin: 25px 0;">
+                <p style="color: #b76e9a; font-size: 1.1rem; margin-bottom: 15px;">
+                    <i class="fas fa-heart"></i> Guarda esta fecha en tu corazón
+                </p>
+                <p style="color: #8b5a7c; font-size: 0.9rem;">
+                    Ese día podrás descubrir mi mensaje especial para ti
+                </p>
+            </div>
+            
+            <div id="countdown" style="background: #fff0f5; border-radius: 10px; padding: 15px; margin: 20px 0;">
+                <h3 style="color: #ff66a3; margin-bottom: 10px;">Faltan:</h3>
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdownDays">0</div>
+                        <div class="countdown-label">DÍAS</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdownHours">0</div>
+                        <div class="countdown-label">HORAS</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdownMinutes">0</div>
+                        <div class="countdown-label">MINUTOS</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="color: #ff66a3; font-style: italic; margin-top: 20px;">
+                Te espero con todo mi amor para ese día especial 💖
+            </p>
+        </div>
+        
+        <!-- LOGIN CARD (DESPUÉS DEL 15/02/26) -->
         <div class="login-card" id="loginCard">
             <h1 class="main-title">Para Mi Niña Hermosa</h1>
             <p class="subtitle">Este mensaje es solo para ti</p>
@@ -407,75 +184,42 @@
                 <input type="text" class="name-input" id="nameInput" placeholder="Escribe aquí..." autocomplete="off">
             </div>
             
-            <button class="continue-btn" id="continueBtn">
-                Continuar
-            </button>
-            
+            <button class="continue-btn" id="continueBtn">Continuar</button>
             <div class="error-msg" id="errorMsg"></div>
         </div>
-
-        <!-- Contenido principal (oculto al inicio) -->
+        
+        <!-- CONTENIDO PRINCIPAL -->
         <div class="main-content" id="mainContent">
-            <!-- Título principal -->
             <div class="content-header">
                 <h1 class="content-title">PARA MI NIÑAW HERMOSA OHSHI OHSHI 💖</h1>
             </div>
-
-            <!-- Contador simple -->
             <div class="simple-counter">
                 <h2 class="counter-title">Nuestro Tiempo</h2>
                 <div class="counter-number">1</div>
                 <div class="counter-label">MES JUNTOS</div>
             </div>
-
-            <!-- Carta cerrada -->
             <div class="letter-closed" id="letterClosed">
-                <div class="letter-seal">
-                    <i class="fas fa-heart"></i>
-                </div>
+                <div class="letter-seal"><i class="fas fa-heart"></i></div>
                 <h3>Toca para abrir mi carta</h3>
                 <p class="letter-instruction">Haz clic en el corazón</p>
             </div>
-
-            <!-- Carta abierta -->
             <div class="letter-opened" id="letterOpened">
                 <div class="letter-content">
                     <p>MI NIÑAW HERMOSAW,</p>
-                    
                     <p>PUEZZ KERIA DECIRTEWWW KEW BUENOW KE TEAMOWWWWWWWW MUCHO MI VIDAWW GRACIAZZZZZZZ POR SER LA MEJOR CHIKAWW DE VERDAWWWW AMOWWWWWWWWW COMO ME TRATAS SIEMPREWWW TAN TIERNA Y TAN LINDAWW KE HASTA SHO ME SONROJO😳😳, AMOW KUANDO ME DICES MI BEBESHITOW ME SONROJO MUCHOW😳</p>
-                    
                     <p>AMOWWWWWWW KUANDO SIEMPRE JUWAMOS ROBLOXXXX DE VERDAD ME ENKANTAJUWAR CON VOS Y HABLAR KONTIKO TODO EL DIA ASLDKJASLKDAS, SIEMPRE PIENSO EN VOS TODO EL DIAW OHSHIOSHI😳😳.</p>
-                    
                     <p>ESTE MESW HA SIDO COMO EL PRIMER CAPITULO DEL LIBRO MAS HERMOSOW. Y YA NO KIERO LEER OTRO LIBROW.... KIERO SEGUIR ESCRIBIENDO ESTA HISTORIA KONTIKO HASTA EL FINAL😳😳</p>
-                    
                     <p>BUENOWW IIII LASKDJSLKADLKSA TE AMO DEMASIADOWWW MI NIÑAW HERMOSAWWWWPRECIOSAWMIREINAWWDIOZZ ZKLEKLJELKJELKJE .</p>
-                    
                     <p>MWAH MWAH BEZITOZ TE AMOW.</p>
-                    
-                    <div class="letter-signature">
-                        Con todo mi amor ❤️
-                    </div>
+                    <div class="letter-signature">Con todo mi amor ❤️</div>
                 </div>
             </div>
-
-            <!-- Mensaje final especial -->
             <div class="final-special">
                 <h2 class="love-message">TEAMOWWWWW CON TODO MI CORAZON 💖</h2>
-                
-                <div class="special-text">
-                    MI NIÑAW SOS LA MEJOR CHICA DEL MUNDO 😳
-                </div>
-                
-                <div class="special-text" style="background: #fff0f5; font-size: 1.1rem;">
-                    Cada día me haces el chico más feliz del universo 🌟
-                </div>
-                
-                <button class="heart-btn" id="heartBtn">
-                    <i class="fas fa-heartbeat"></i> TE AMO DEMASIADO MI VIDA
-                </button>
+                <div class="special-text">MI NIÑAW SOS LA MEJOR CHICA DEL MUNDO 😳</div>
+                <div class="special-text" style="background: #fff0f5; font-size: 1.1rem;">Cada día me haces el chico más feliz del universo 🌟</div>
+                <button class="heart-btn" id="heartBtn"><i class="fas fa-heartbeat"></i> TE AMO DEMASIADO MI VIDA</button>
             </div>
-
-            <!-- Footer -->
             <footer>
                 <p>ERES MI PERSONA FAVORITA 💕</p>
                 <p>SIEMPRE A TU LADO</p>
@@ -486,18 +230,68 @@
     <script>
         // ========== CONFIGURACIÓN ==========
         const CORRECT_NAME = "mailyn";
+        const UNLOCK_DATE = new Date('2026-02-15T00:00:00'); // 15 de Febrero 2026
         let heartsCreated = 0;
         const MAX_HEARTS = 15;
-
-        // ========== CREAR CORAZONES SUAVES ==========
+        
+        // ========== VERIFICAR FECHA ==========
+        function checkDate() {
+            const now = new Date();
+            const waitingScreen = document.getElementById('waitingScreen');
+            const loginCard = document.getElementById('loginCard');
+            
+            if (now >= UNLOCK_DATE) {
+                // Fecha alcanzada - mostrar login
+                waitingScreen.style.display = 'none';
+                loginCard.style.display = 'block';
+                startSoftHearts();
+            } else {
+                // Aún no es la fecha - mostrar pantalla de espera
+                waitingScreen.style.display = 'block';
+                loginCard.style.display = 'none';
+                startCountdown();
+                startSoftHearts();
+            }
+        }
+        
+        // ========== CONTADOR REGRESIVO ==========
+        function startCountdown() {
+            function updateCountdown() {
+                const now = new Date();
+                const diff = UNLOCK_DATE - now;
+                
+                if (diff <= 0) {
+                    // La fecha llegó, recargar página
+                    location.reload();
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('countdownDays').textContent = days;
+                document.getElementById('countdownHours').textContent = hours;
+                document.getElementById('countdownMinutes').textContent = minutes;
+                
+                // Efecto de animación
+                if (days <= 7) {
+                    document.getElementById('countdown').style.background = 'linear-gradient(135deg, #fff0f5, #ffe4ec)';
+                    document.getElementById('countdown').style.animation = 'pulse 2s infinite';
+                }
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 60000); // Actualizar cada minuto
+        }
+        
+        // ========== CREAR CORAZONES ==========
         function createSoftHearts() {
             if (heartsCreated >= MAX_HEARTS) return;
-            
             const container = document.getElementById('heartsBg');
             const heart = document.createElement('div');
             heart.className = 'heart';
             heart.innerHTML = '❤️';
-            
             heart.style.left = `${Math.random() * 100}%`;
             const size = Math.random() * 15 + 10;
             heart.style.fontSize = `${size}px`;
@@ -505,16 +299,11 @@
             heart.style.animationDuration = `${duration}s`;
             heart.style.animationDelay = `${Math.random() * 2}s`;
             heart.style.opacity = Math.random() * 0.3 + 0.2;
-            
             container.appendChild(heart);
             heartsCreated++;
-            
-            setTimeout(() => {
-                heart.remove();
-                heartsCreated--;
-            }, duration * 1000);
+            setTimeout(() => { heart.remove(); heartsCreated--; }, duration * 1000);
         }
-
+        
         // ========== VERIFICAR NOMBRE ==========
         function checkName() {
             const nameInput = document.getElementById('nameInput');
@@ -534,54 +323,41 @@
                 setTimeout(() => nameInput.style.animation = '', 400);
             }
         }
-
+        
         // ========== MOSTRAR CONTENIDO PRINCIPAL ==========
         function showMainContent() {
             const loginCard = document.getElementById('loginCard');
             const mainContent = document.getElementById('mainContent');
-            
             loginCard.style.opacity = '0';
             loginCard.style.transform = 'scale(0.95)';
-            
             setTimeout(() => {
                 loginCard.style.display = 'none';
                 mainContent.style.display = 'block';
                 startSoftHearts();
             }, 500);
         }
-
-        // ========== INICIAR CORAZONES SUAVES ==========
+        
+        // ========== INICIAR CORAZONES ==========
         function startSoftHearts() {
-            for (let i = 0; i < 5; i++) {
-                setTimeout(createSoftHearts, i * 300);
-            }
-            
-            setInterval(() => {
-                if (heartsCreated < MAX_HEARTS) {
-                    createSoftHearts();
-                }
-            }, 2000);
+            for (let i = 0; i < 5; i++) setTimeout(createSoftHearts, i * 300);
+            setInterval(() => { if (heartsCreated < MAX_HEARTS) createSoftHearts(); }, 2000);
         }
-
+        
         // ========== ABRIR CARTA ==========
         function openLetter() {
             const letterClosed = document.getElementById('letterClosed');
             const letterOpened = document.getElementById('letterOpened');
-            
             letterClosed.style.opacity = '0';
             letterClosed.style.transform = 'scale(0.9)';
-            
             setTimeout(() => {
                 letterClosed.style.display = 'none';
                 letterOpened.style.display = 'block';
                 createSpecialHearts();
             }, 400);
         }
-
-        // ========== CORAZONES ESPECIALES AL ABRIR CARTA ==========
+        
+        // ========== CORAZONES ESPECIALES ==========
         function createSpecialHearts() {
-            const container = document.getElementById('heartsBg');
-            
             for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
@@ -595,50 +371,30 @@
                     heart.style.zIndex = '100';
                     heart.style.transform = 'translate(-50%, -50%)';
                     heart.style.animation = 'specialHeart 1.2s forwards';
-                    
                     const style = document.createElement('style');
-                    style.textContent = `
-                        @keyframes specialHeart {
-                            0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
-                            50% { opacity: 1; }
-                            100% { transform: translate(${Math.random() * 100 - 50}%, ${Math.random() * 100 - 150}%) scale(1); opacity: 0; }
-                        }
-                    `;
+                    style.textContent = `@keyframes specialHeart {0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }50% { opacity: 1; }100% { transform: translate(${Math.random() * 100 - 50}%, ${Math.random() * 100 - 150}%) scale(1); opacity: 0; }}`;
                     document.head.appendChild(style);
                     document.body.appendChild(heart);
-                    
-                    setTimeout(() => {
-                        heart.remove();
-                        style.remove();
-                    }, 1200);
+                    setTimeout(() => { heart.remove(); style.remove(); }, 1200);
                 }, i * 200);
             }
         }
-
+        
         // ========== EFECTO DEL BOTÓN DE AMOR ==========
         function createLoveEffect() {
             const heartBtn = document.getElementById('heartBtn');
-            
-            // Cambiar texto del botón
             heartBtn.innerHTML = '<i class="fas fa-heart"></i> ¡TE AMO CON TODO MI SER! 😳💖';
             heartBtn.style.background = 'linear-gradient(135deg, #ff3366, #ff66a3)';
             heartBtn.style.transform = 'scale(1.05)';
-            
-            
-            // Crear explosión de corazones
             createHeartExplosion();
-            
-            
-            // Volver a estado normal después de 2 segundos
             setTimeout(() => {
-                heartBtn.style.transform = 'scale(1)';
-            }, 2000);
+                alert('💖 MI NIÑAW HERMOSA, SOS LO MEJOR QUE ME HA PASADO EN LA VIDA 💖\n\nTE AMO DEMASIADO, MI REINA PRECIOSA 😳');
+            }, 800);
+            setTimeout(() => { heartBtn.style.transform = 'scale(1)'; }, 2000);
         }
-
+        
         // ========== EXPLOSIÓN DE CORAZONES ==========
         function createHeartExplosion() {
-            const container = document.getElementById('heartsBg');
-            
             for (let i = 0; i < 12; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
@@ -652,72 +408,89 @@
                     heart.style.zIndex = '1000';
                     heart.style.transform = 'translate(-50%, -50%)';
                     heart.style.animation = `heartExplode${i} 1.8s forwards`;
-                    
                     const style = document.createElement('style');
                     const angle = Math.random() * Math.PI * 2;
                     const distance = 180 + Math.random() * 120;
                     const endX = Math.cos(angle) * distance;
                     const endY = Math.sin(angle) * distance;
-                    
-                    style.textContent = `
-                        @keyframes heartExplode${i} {
-                            0% { 
-                                transform: translate(-50%, -50%) scale(0.3); 
-                                opacity: 0.8;
-                            }
-                            50% { 
-                                opacity: 1;
-                            }
-                            100% { 
-                                transform: translate(${endX}px, ${endY}px) scale(1); 
-                                opacity: 0;
-                            }
-                        }
-                    `;
-                    
+                    style.textContent = `@keyframes heartExplode${i} {0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.8; }50% { opacity: 1; }100% { transform: translate(${endX}px, ${endY}px) scale(1); opacity: 0; }}`;
                     document.head.appendChild(style);
                     document.body.appendChild(heart);
-                    
-                    setTimeout(() => {
-                        heart.remove();
-                        style.remove();
-                    }, 1800);
+                    setTimeout(() => { heart.remove(); style.remove(); }, 1800);
                 }, i * 150);
             }
         }
-
+        
         // ========== INICIALIZAR ==========
         document.addEventListener('DOMContentLoaded', function() {
-            // Crear corazones iniciales
-            for (let i = 0; i < 8; i++) {
-                setTimeout(createSoftHearts, i * 400);
-            }
+            // Verificar fecha primero
+            checkDate();
             
-            // Evento para el botón Continuar
+            // Crear corazones iniciales
+            for (let i = 0; i < 8; i++) setTimeout(createSoftHearts, i * 400);
+            
+            // Evento para el botón Continuar (solo si está visible)
             document.getElementById('continueBtn').addEventListener('click', checkName);
             
             // Evento para Enter en el input
-            document.getElementById('nameInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkName();
-                }
+            document.getElementById('nameInput')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') checkName();
             });
             
-            // Evento para abrir carta
-            document.getElementById('letterClosed').addEventListener('click', openLetter);
+            // Evento para abrir carta (solo si está visible)
+            document.getElementById('letterClosed')?.addEventListener('click', openLetter);
             
-            // Evento para botón de amor
-            document.getElementById('heartBtn').addEventListener('click', createLoveEffect);
+            // Evento para botón de amor (solo si está visible)
+            document.getElementById('heartBtn')?.addEventListener('click', createLoveEffect);
             
             // Efecto en input al enfocar
             const nameInput = document.getElementById('nameInput');
-            nameInput.addEventListener('focus', function() {
-                this.style.transform = 'scale(1.02)';
-            });
+            if (nameInput) {
+                nameInput.addEventListener('focus', function() { this.style.transform = 'scale(1.02)'; });
+                nameInput.addEventListener('blur', function() { this.style.transform = 'scale(1)'; });
+            }
             
-            nameInput.addEventListener('blur', function() {
-                this.style.transform = 'scale(1)';
-            });
+            // Añadir estilos CSS para countdown
+            const countdownStyle = document.createElement('style');
+            countdownStyle.textContent = `
+                .countdown-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    min-width: 60px;
+                }
+                .countdown-value {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: #ff66a3;
+                    background: white;
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 5px;
+                    border: 2px solid #ffc2d1;
+                }
+                .countdown-label {
+                    font-size: 0.8rem;
+                    color: #b76e9a;
+                    font-weight: 600;
+                }
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.02); }
+                }
+                @media (max-width: 480px) {
+                    .countdown-value {
+                        width: 50px;
+                        height: 50px;
+                        font-size: 1.5rem;
+                    }
+                }
+            `;
+            document.head.appendChild(countdownStyle);
         });
     </script>
 </body>
