@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Niña Hermosa 💕</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* RESET Y ESTILOS GENERALES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #8b5a7c;
+        }
+
+        /* CORAZONES SUAVES EN FONDO */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.4);
+            font-size: 20px;
+            animation: float 8s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* CONTENEDOR PRINCIPAL CENTRADO */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* TARJETA DE LOGIN */
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            box-shadow: 0 15px 30px rgba(214, 51, 132, 0.2);
+            border: 3px solid #ffafcc;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ffafcc, #ffc2d1);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #ff66a3;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #b76e9a;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        /* INPUT DE NOMBRE */
+        .input-group {
+            margin: 25px 0;
+        }
+
+        .input-label {
+            display: block;
+            color: #ff66a3;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ffc2d1;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+            background: #fff9fb;
+        }
+
+        .name-input:focus {
+            border-color = '#ff66a3';
+            box-shadow: 0 0 0 3px rgba(255, 102, 163, 0.2);
+        }
+
+        /* BOTÓN */
+        .continue-btn {
+            background: linear-gradient(135deg, #ff66a3, #ff8fab);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.3);
+        }
+
+        /* MENSAJE DE ERROR */
+        .error-msg {
+            color: #ff3333;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            min-height: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .main-content {
+            display: none;
+            width: 100%;
+            animation: fadeIn 1s;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ENCABEZADO DEL CONTENIDO */
+        .content-header {
+            margin-bottom: 25px;
+        }
+
+        .content-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #ff66a3;
+            margin-bottom: 10px;
+        }
+
+        /* CONTADOR SIMPLE */
+        .simple-counter {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 2px solid #ffafcc;
+        }
+
+        .counter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #ff66a3;
+            margin-bottom: 15px;
+        }
+
+        .counter-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ff66a3;
+            margin: 10px 0;
+        }
+
+        .counter-label {
+            font-size: 1.5rem;
+            color: #b76e9a;
+        }
+
+        /* CARTA */
+        .letter-closed {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 2px solid #ffafcc;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .letter-closed:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .letter-seal {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff66a3, #ff8fab);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .letter-instruction {
+            color: #b76e9a;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* CARTA ABIERTA */
+        .letter-opened {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 2px solid #ffafcc;
+            animation: openLetter 0.8s;
+            text-align: left;
+        }
+
+        @keyframes openLetter {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #5a3d5c;
+        }
+
+        .letter-content p {
+            margin-bottom: 18px;
+            padding-left: 15px;
+            border-left: 3px solid #ffc2d1;
+        }
+
+        .letter-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            text-align: right;
+            color: #ff66a3;
+            margin-top: 25px;
+        }
+
+        /* MENSAJE FINAL ESPECIAL */
+        .final-special {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 2px solid #ffafcc;
+            text-align: center;
+        }
+
+        .love-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff66a3;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .special-text {
+            font-size: 1.3rem;
+            color: #8b5a7c;
+            margin: 15px 0;
+            padding: 10px;
+            background: #fff5f7;
+            border-radius: 10px;
+            border-left: 4px solid #ff66a3;
+        }
+
+        .heart-btn {
+            background: linear-gradient(135deg, #ff66a3, #ff8fab);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .heart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #b76e9a;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* ANIMACIÓN DE VIBRACIÓN */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+            
+            .main-title {
+                font-size: 2.3rem;
+            }
+            
+            .content-title {
+                font-size: 2.3rem;
+            }
+            
+            .counter-number {
+                font-size: 3.2rem;
+            }
+            
+            .love-message {
+                font-size: 2rem;
+            }
+            
+            .special-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo con corazones suaves -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Contenedor principal centrado -->
+    <div class="container">
+        <!-- Tarjeta de acceso -->
+        <div class="login-card" id="loginCard">
+            <h1 class="main-title">Para Mi Niña Hermosa</h1>
+            <p class="subtitle">Este mensaje es solo para ti</p>
+            
+            <div class="input-group">
+                <label class="input-label">COLOCA TU NOMBRE ACA MI VIDA</label>
+                <input type="text" class="name-input" id="nameInput" placeholder="Escribe aquí..." autocomplete="off">
+            </div>
+            
+            <button class="continue-btn" id="continueBtn">
+                Continuar
+            </button>
+            
+            <div class="error-msg" id="errorMsg"></div>
+        </div>
+
+        <!-- Contenido principal (oculto al inicio) -->
+        <div class="main-content" id="mainContent">
+            <!-- Título principal -->
+            <div class="content-header">
+                <h1 class="content-title">PARA MI NIÑAW HERMOSA OHSHI OHSHI 💖</h1>
+            </div>
+
+            <!-- Contador simple -->
+            <div class="simple-counter">
+                <h2 class="counter-title">Nuestro Tiempo</h2>
+                <div class="counter-number">1</div>
+                <div class="counter-label">MES JUNTOS</div>
+            </div>
+
+            <!-- Carta cerrada -->
+            <div class="letter-closed" id="letterClosed">
+                <div class="letter-seal">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Toca para abrir mi carta</h3>
+                <p class="letter-instruction">Haz clic en el corazón</p>
+            </div>
+
+            <!-- Carta abierta -->
+            <div class="letter-opened" id="letterOpened">
+                <div class="letter-content">
+                    <p>MI NIÑAW HERMOSAW,</p>
+                    
+                    <p>PUEZZ KERIA DECIRTEWWW KEW BUENOW KE TEAMOWWWWWWWW MUCHO MI VIDAWW GRACIAZZZZZZZ POR SER LA MEJOR CHIKAWW DE VERDAWWWW AMOWWWWWWWWW COMO ME TRATAS SIEMPREWWW TAN TIERNA Y TAN LINDAWW KE HASTA SHO ME SONROJO😳😳, AMOW KUANDO ME DICES MI BEBESHITOW ME SONROJO MUCHOW😳</p>
+                    
+                    <p>AMOWWWWWWW KUANDO SIEMPRE JUWAMOS ROBLOXXXX DE VERDAD ME ENKANTAJUWAR CON VOS Y HABLAR KONTIKO TODO EL DIA ASLDKJASLKDAS, SIEMPRE PIENSO EN VOS TODO EL DIAW OHSHIOSHI😳😳.</p>
+                    
+                    <p>ESTE MESW HA SIDO COMO EL PRIMER CAPITULO DEL LIBRO MAS HERMOSOW. Y YA NO KIERO LEER OTRO LIBROW.... KIERO SEGUIR ESCRIBIENDO ESTA HISTORIA KONTIKO HASTA EL FINAL😳😳</p>
+                    
+                    <p>BUENOWW IIII LASKDJSLKADLKSA TE AMO DEMASIADOWWW MI NIÑAW HERMOSAWWWWPRECIOSAWMIREINAWWDIOZZ ZKLEKLJELKJELKJE .</p>
+                    
+                    <p>MWAH MWAH BEZITOZ TE AMOW.</p>
+                    
+                    <div class="letter-signature">
+                        Con todo mi amor ❤️
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensaje final especial -->
+            <div class="final-special">
+                <h2 class="love-message">TEAMOWWWWW CON TODO MI CORAZON 💖</h2>
+                
+                <div class="special-text">
+                    MI NIÑAW SOS LA MEJOR CHICA DEL MUNDO 😳
+                </div>
+                
+                <div class="special-text" style="background: #fff0f5; font-size: 1.1rem;">
+                    Cada día me haces el chico más feliz del universo 🌟
+                </div>
+                
+                <button class="heart-btn" id="heartBtn">
+                    <i class="fas fa-heartbeat"></i> TE AMO DEMASIADO MI VIDA
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                <p>ERES MI PERSONA FAVORITA 💕</p>
+                <p>SIEMPRE A TU LADO</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // ========== CONFIGURACIÓN ==========
+        const CORRECT_NAME = "mailyn";
+        let heartsCreated = 0;
+        const MAX_HEARTS = 15;
+
+        // ========== CREAR CORAZONES SUAVES ==========
+        function createSoftHearts() {
+            if (heartsCreated >= MAX_HEARTS) return;
+            
+            const container = document.getElementById('heartsBg');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            
+            heart.style.left = `${Math.random() * 100}%`;
+            const size = Math.random() * 15 + 10;
+            heart.style.fontSize = `${size}px`;
+            const duration = Math.random() * 6 + 8;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.animationDelay = `${Math.random() * 2}s`;
+            heart.style.opacity = Math.random() * 0.3 + 0.2;
+            
+            container.appendChild(heart);
+            heartsCreated++;
+            
+            setTimeout(() => {
+                heart.remove();
+                heartsCreated--;
+            }, duration * 1000);
+        }
+
+        // ========== VERIFICAR NOMBRE ==========
+        function checkName() {
+            const nameInput = document.getElementById('nameInput');
+            const errorMsg = document.getElementById('errorMsg');
+            const enteredName = nameInput.value.trim().toLowerCase();
+            
+            if (enteredName === CORRECT_NAME) {
+                errorMsg.style.opacity = '0';
+                showMainContent();
+            } else if (enteredName === '') {
+                errorMsg.textContent = 'Por favor, escribe tu nombre';
+                errorMsg.style.opacity = '1';
+            } else {
+                errorMsg.textContent = 'Nombre incorrecto. Solo Mailyn puede ver esto.';
+                errorMsg.style.opacity = '1';
+                nameInput.style.animation = 'shake 0.4s';
+                setTimeout(() => nameInput.style.animation = '', 400);
+            }
+        }
+
+        // ========== MOSTRAR CONTENIDO PRINCIPAL ==========
+        function showMainContent() {
+            const loginCard = document.getElementById('loginCard');
+            const mainContent = document.getElementById('mainContent');
+            
+            loginCard.style.opacity = '0';
+            loginCard.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                loginCard.style.display = 'none';
+                mainContent.style.display = 'block';
+                startSoftHearts();
+            }, 500);
+        }
+
+        // ========== INICIAR CORAZONES SUAVES ==========
+        function startSoftHearts() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(createSoftHearts, i * 300);
+            }
+            
+            setInterval(() => {
+                if (heartsCreated < MAX_HEARTS) {
+                    createSoftHearts();
+                }
+            }, 2000);
+        }
+
+        // ========== ABRIR CARTA ==========
+        function openLetter() {
+            const letterClosed = document.getElementById('letterClosed');
+            const letterOpened = document.getElementById('letterOpened');
+            
+            letterClosed.style.opacity = '0';
+            letterClosed.style.transform = 'scale(0.9)';
+            
+            setTimeout(() => {
+                letterClosed.style.display = 'none';
+                letterOpened.style.display = 'block';
+                createSpecialHearts();
+            }, 400);
+        }
+
+        // ========== CORAZONES ESPECIALES AL ABRIR CARTA ==========
+        function createSpecialHearts() {
+            const container = document.getElementById('heartsBg');
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💖';
+                    heart.style.position = 'fixed';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = '25px';
+                    heart.style.color = '#ff66a3';
+                    heart.style.opacity = '0.7';
+                    heart.style.zIndex = '100';
+                    heart.style.transform = 'translate(-50%, -50%)';
+                    heart.style.animation = 'specialHeart 1.2s forwards';
+                    
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes specialHeart {
+                            0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
+                            50% { opacity: 1; }
+                            100% { transform: translate(${Math.random() * 100 - 50}%, ${Math.random() * 100 - 150}%) scale(1); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                        style.remove();
+                    }, 1200);
+                }, i * 200);
+            }
+        }
+
+        // ========== EFECTO DEL BOTÓN DE AMOR ==========
+        function createLoveEffect() {
+            const heartBtn = document.getElementById('heartBtn');
+            
+            // Cambiar texto del botón
+            heartBtn.innerHTML = '<i class="fas fa-heart"></i> ¡TE AMO CON TODO MI SER! 😳💖';
+            heartBtn.style.background = 'linear-gradient(135deg, #ff3366, #ff66a3)';
+            heartBtn.style.transform = 'scale(1.05)';
+            
+            
+            // Crear explosión de corazones
+            createHeartExplosion();
+            
+            
+            // Volver a estado normal después de 2 segundos
+            setTimeout(() => {
+                heartBtn.style.transform = 'scale(1)';
+            }, 2000);
+        }
+
+        // ========== EXPLOSIÓN DE CORAZONES ==========
+        function createHeartExplosion() {
+            const container = document.getElementById('heartsBg');
+            
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💖';
+                    heart.style.position = 'fixed';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = '30px';
+                    heart.style.color = '#ff3366';
+                    heart.style.opacity = '0.8';
+                    heart.style.zIndex = '1000';
+                    heart.style.transform = 'translate(-50%, -50%)';
+                    heart.style.animation = `heartExplode${i} 1.8s forwards`;
+                    
+                    const style = document.createElement('style');
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 180 + Math.random() * 120;
+                    const endX = Math.cos(angle) * distance;
+                    const endY = Math.sin(angle) * distance;
+                    
+                    style.textContent = `
+                        @keyframes heartExplode${i} {
+                            0% { 
+                                transform: translate(-50%, -50%) scale(0.3); 
+                                opacity: 0.8;
+                            }
+                            50% { 
+                                opacity: 1;
+                            }
+                            100% { 
+                                transform: translate(${endX}px, ${endY}px) scale(1); 
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    
+                    document.head.appendChild(style);
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                        style.remove();
+                    }, 1800);
+                }, i * 150);
+            }
+        }
+
+        // ========== INICIALIZAR ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Crear corazones iniciales
+            for (let i = 0; i < 8; i++) {
+                setTimeout(createSoftHearts, i * 400);
+            }
+            
+            // Evento para el botón Continuar
+            document.getElementById('continueBtn').addEventListener('click', checkName);
+            
+            // Evento para Enter en el input
+            document.getElementById('nameInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkName();
+                }
+            });
+            
+            // Evento para abrir carta
+            document.getElementById('letterClosed').addEventListener('click', openLetter);
+            
+            // Evento para botón de amor
+            document.getElementById('heartBtn').addEventListener('click', createLoveEffect);
+            
+            // Efecto en input al enfocar
+            const nameInput = document.getElementById('nameInput');
+            nameInput.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            nameInput.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
