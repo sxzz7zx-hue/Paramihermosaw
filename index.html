@@ -7,14 +7,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        /* ESTILOS GENERALES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #ffb6c1, #ffc0cb); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; color: #8b5a7c; }
-        .hearts-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
-        .heart { position: absolute; color: rgba(255, 105, 180, 0.4); font-size: 20px; animation: float 8s linear infinite; opacity: 0.5; }
-        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
-        .container { width: 100%; max-width: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #ffb6c1, #ffc0cb); 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+            color: #8b5a7c; 
+        }
         
-        /* PANTALLA DE ESPERA (ANTES DEL 15/02/26) */
+        /* CORAZONES */
+        .hearts-bg { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            pointer-events: none; 
+            z-index: -1; 
+        }
+        .heart { 
+            position: absolute; 
+            color: rgba(255, 105, 180, 0.4); 
+            font-size: 20px; 
+            animation: float 8s linear infinite; 
+            opacity: 0.5; 
+        }
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 
+            10% { opacity: 0.5; } 
+            90% { opacity: 0.5; } 
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } 
+        }
+        
+        /* CONTENEDOR */
+        .container { 
+            width: 100%; 
+            max-width: 500px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        /* PANTALLA DE ESPERA */
         .waiting-screen {
             background: white;
             border-radius: 20px;
@@ -28,9 +66,7 @@
         .waiting-screen::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 6px;
             background: linear-gradient(90deg, #ffafcc, #ffc2d1);
             border-radius: 20px 20px 0 0;
@@ -58,7 +94,67 @@
             margin-top: 5px;
         }
         
-        /* LOGIN CARD (DESPUÉS DEL 15/02/26) */
+        /* LOGIN SECRETO (PARA TÍ) */
+        .secret-login {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            width: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #4CAF50;
+            display: none;
+            z-index: 1000;
+        }
+        .secret-login h4 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .secret-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .secret-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 0.9rem;
+            width: 100%;
+            cursor: pointer;
+        }
+        .secret-btn:hover {
+            background: #45a049;
+        }
+        
+        /* BOTÓN PARA MOSTRAR LOGIN SECRETO */
+        .secret-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        /* LOGIN NORMAL (PARA ELLA) */
         .login-card {
             background: white;
             border-radius: 20px;
@@ -73,48 +169,234 @@
         .login-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 6px;
             background: linear-gradient(90deg, #ffafcc, #ffc2d1);
             border-radius: 20px 20px 0 0;
         }
-        .main-title { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff66a3; margin-bottom: 15px; }
-        .subtitle { color: #b76e9a; font-size: 1rem; margin-bottom: 25px; }
+        .main-title { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 2.8rem; 
+            color: #ff66a3; 
+            margin-bottom: 15px; 
+        }
+        .subtitle { 
+            color: #b76e9a; 
+            font-size: 1rem; 
+            margin-bottom: 25px; 
+        }
         .input-group { margin: 25px 0; }
-        .input-label { display: block; color: #ff66a3; font-weight: 600; margin-bottom: 10px; font-size: 1.1rem; }
-        .name-input { width: 100%; padding: 15px; border: 2px solid #ffc2d1; border-radius: 12px; font-size: 1.1rem; text-align: center; outline: none; transition: all 0.3s; background: #fff9fb; }
-        .name-input:focus { border-color: #ff66a3; box-shadow: 0 0 0 3px rgba(255, 102, 163, 0.2); }
-        .continue-btn { background: linear-gradient(135deg, #ff66a3, #ff8fab); color: white; border: none; border-radius: 12px; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 10px; font-family: 'Poppins', sans-serif; }
-        .continue-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 102, 163, 0.3); }
-        .error-msg { color: #ff3333; margin-top: 15px; font-size: 0.9rem; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
+        .input-label { 
+            display: block; 
+            color: #ff66a3; 
+            font-weight: 600; 
+            margin-bottom: 10px; 
+            font-size: 1.1rem; 
+        }
+        .name-input { 
+            width: 100%; 
+            padding: 15px; 
+            border: 2px solid #ffc2d1; 
+            border-radius: 12px; 
+            font-size: 1.1rem; 
+            text-align: center; 
+            outline: none; 
+            transition: all 0.3s; 
+            background: #fff9fb; 
+        }
+        .name-input:focus { 
+            border-color: #ff66a3; 
+            box-shadow: 0 0 0 3px rgba(255, 102, 163, 0.2); 
+        }
+        .continue-btn { 
+            background: linear-gradient(135deg, #ff66a3, #ff8fab); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            padding: 15px 30px; 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            width: 100%; 
+            margin-top: 10px; 
+            font-family: 'Poppins', sans-serif; 
+        }
+        .continue-btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.3); 
+        }
+        .error-msg { 
+            color: #ff3333; 
+            margin-top: 15px; 
+            font-size: 0.9rem; 
+            min-height: 20px; 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+        }
         
         /* CONTENIDO PRINCIPAL */
-        .main-content { display: none; width: 100%; animation: fadeIn 1s; text-align: center; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .main-content { 
+            display: none; 
+            width: 100%; 
+            animation: fadeIn 1s; 
+            text-align: center; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
         .content-header { margin-bottom: 25px; }
-        .content-title { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff66a3; margin-bottom: 10px; }
-        .simple-counter { background: white; border-radius: 15px; padding: 25px; margin: 20px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #ffafcc; }
-        .counter-title { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ff66a3; margin-bottom: 15px; }
-        .counter-number { font-size: 4rem; font-weight: 700; color: #ff66a3; margin: 10px 0; }
-        .counter-label { font-size: 1.5rem; color: #b76e9a; }
-        .letter-closed { background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 2px solid #ffafcc; cursor: pointer; transition: all 0.3s; }
-        .letter-closed:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-        .letter-seal { width: 70px; height: 70px; background: linear-gradient(135deg, #ff66a3, #ff8fab); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .letter-instruction { color: #b76e9a; margin-top: 10px; font-size: 0.9rem; }
-        .letter-opened { display: none; background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 2px solid #ffafcc; animation: openLetter 0.8s; text-align: left; }
-        @keyframes openLetter { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .letter-content { font-size: 1.1rem; line-height: 1.7; color: #5a3d5c; }
-        .letter-content p { margin-bottom: 18px; padding-left: 15px; border-left: 3px solid #ffc2d1; }
-        .letter-signature { font-family: 'Dancing Script', cursive; font-size: 2rem; text-align: right; color: #ff66a3; margin-top: 25px; }
-        .final-special { background: white; border-radius: 15px; padding: 25px; margin: 25px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #ffafcc; text-align: center; }
-        .love-message { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff66a3; margin-bottom: 15px; line-height: 1.3; }
-        .special-text { font-size: 1.3rem; color: #8b5a7c; margin: 15px 0; padding: 10px; background: #fff5f7; border-radius: 10px; border-left: 4px solid #ff66a3; }
-        .heart-btn { background: linear-gradient(135deg, #ff66a3, #ff8fab); color: white; border: none; border-radius: 12px; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 15px; font-family: 'Poppins', sans-serif; }
-        .heart-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 102, 163, 0.4); }
-        footer { text-align: center; padding: 20px; color: #b76e9a; font-size: 0.9rem; margin-top: 10px; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .content-title { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 2.8rem; 
+            color: #ff66a3; 
+            margin-bottom: 10px; 
+        }
+        .simple-counter { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 25px; 
+            margin: 20px 0; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+            border: 2px solid #ffafcc; 
+        }
+        .counter-title { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 2.2rem; 
+            color: #ff66a3; 
+            margin-bottom: 15px; 
+        }
+        .counter-number { 
+            font-size: 4rem; 
+            font-weight: 700; 
+            color: #ff66a3; 
+            margin: 10px 0; 
+        }
+        .counter-label { 
+            font-size: 1.5rem; 
+            color: #b76e9a; 
+        }
+        .letter-closed { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 30px; 
+            margin: 20px 0; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            border: 2px solid #ffafcc; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+        }
+        .letter-closed:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2); 
+        }
+        .letter-seal { 
+            width: 70px; 
+            height: 70px; 
+            background: linear-gradient(135deg, #ff66a3, #ff8fab); 
+            border-radius: 50%; 
+            margin: 0 auto 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-size: 1.8rem; 
+            border: 3px solid white; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        .letter-instruction { 
+            color: #b76e9a; 
+            margin-top: 10px; 
+            font-size: 0.9rem; 
+        }
+        .letter-opened { 
+            display: none; 
+            background: white; 
+            border-radius: 15px; 
+            padding: 30px; 
+            margin: 20px 0; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+            border: 2px solid #ffafcc; 
+            animation: openLetter 0.8s; 
+            text-align: left; 
+        }
+        @keyframes openLetter { 
+            0% { transform: scale(0.9); opacity: 0; } 
+            100% { transform: scale(1); opacity: 1; } 
+        }
+        .letter-content { 
+            font-size: 1.1rem; 
+            line-height: 1.7; 
+            color: #5a3d5c; 
+        }
+        .letter-content p { 
+            margin-bottom: 18px; 
+            padding-left: 15px; 
+            border-left: 3px solid #ffc2d1; 
+        }
+        .letter-signature { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 2rem; 
+            text-align: right; 
+            color: #ff66a3; 
+            margin-top: 25px; 
+        }
+        .final-special { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 25px; 
+            margin: 25px 0; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+            border: 2px solid #ffafcc; 
+            text-align: center; 
+        }
+        .love-message { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 2.5rem; 
+            color: #ff66a3; 
+            margin-bottom: 15px; 
+            line-height: 1.3; 
+        }
+        .special-text { 
+            font-size: 1.3rem; 
+            color: #8b5a7c; 
+            margin: 15px 0; 
+            padding: 10px; 
+            background: #fff5f7; 
+            border-radius: 10px; 
+            border-left: 4px solid #ff66a3; 
+        }
+        .heart-btn { 
+            background: linear-gradient(135deg, #ff66a3, #ff8fab); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            padding: 15px 30px; 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            width: 100%; 
+            margin-top: 15px; 
+            font-family: 'Poppins', sans-serif; 
+        }
+        .heart-btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.4); 
+        }
+        footer { 
+            text-align: center; 
+            padding: 20px; 
+            color: #b76e9a; 
+            font-size: 0.9rem; 
+            margin-top: 10px; 
+        }
+        @keyframes shake { 
+            0%, 100% { transform: translateX(0); } 
+            25% { transform: translateX(-5px); } 
+            75% { transform: translateX(5px); } 
+        }
         @media (max-width: 480px) {
             .login-card, .waiting-screen { padding: 30px 20px; }
             .main-title, .content-title { font-size: 2.3rem; }
@@ -123,13 +405,34 @@
             .special-text { font-size: 1.1rem; }
             .lock-icon { font-size: 3rem; }
             .date-number { font-size: 2rem; }
+            .secret-login { 
+                width: 90%; 
+                right: 5%; 
+                left: 5%; 
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Fondo con corazones -->
     <div class="hearts-bg" id="heartsBg"></div>
+    
+    <!-- Botón para mostrar login secreto -->
+    <button class="secret-toggle" id="secretToggle">
+        <i class="fas fa-key"></i>
+    </button>
+    
+    <!-- Login secreto (para ti) -->
+    <div class="secret-login" id="secretLogin">
+        <h4>ACCESO ADMIN</h4>
+        <input type="password" class="secret-input" id="secretCode" placeholder="Código de acceso">
+        <button class="secret-btn" id="secretBtn">Acceder</button>
+        <div id="secretError" style="color: red; font-size: 0.8rem; margin-top: 5px;"></div>
+    </div>
+    
+    <!-- Contenedor principal -->
     <div class="container">
-        <!-- PANTALLA DE ESPERA (ANTES DEL 15/02/26) -->
+        <!-- Pantalla de espera -->
         <div class="waiting-screen" id="waitingScreen">
             <div class="lock-icon">
                 <i class="fas fa-lock"></i>
@@ -151,6 +454,7 @@
                 </p>
             </div>
             
+            <!-- Contador regresivo -->
             <div id="countdown" style="background: #fff0f5; border-radius: 10px; padding: 15px; margin: 20px 0;">
                 <h3 style="color: #ff66a3; margin-bottom: 10px;">Faltan:</h3>
                 <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
@@ -174,7 +478,7 @@
             </p>
         </div>
         
-        <!-- LOGIN CARD (DESPUÉS DEL 15/02/26) -->
+        <!-- Login normal (para ella) -->
         <div class="login-card" id="loginCard">
             <h1 class="main-title">Para Mi Niña Hermosa</h1>
             <p class="subtitle">Este mensaje es solo para ti</p>
@@ -188,7 +492,7 @@
             <div class="error-msg" id="errorMsg"></div>
         </div>
         
-        <!-- CONTENIDO PRINCIPAL -->
+        <!-- Contenido principal -->
         <div class="main-content" id="mainContent">
             <div class="content-header">
                 <h1 class="content-title">PARA MI NIÑAW HERMOSA OHSHI OHSHI 💖</h1>
@@ -229,8 +533,9 @@
 
     <script>
         // ========== CONFIGURACIÓN ==========
-        const CORRECT_NAME = "mailyn";
-        const UNLOCK_DATE = new Date('2026-02-15T00:00:00'); // 15 de Febrero 2026
+        const UNLOCK_DATE = new Date('2026-02-15T00:00:00'); // 15/02/2026
+        const SECRET_CODE = "150226901288021"; // Tu código secreto
+        let correctName = ""; // Tú decides el nombre después
         let heartsCreated = 0;
         const MAX_HEARTS = 15;
         
@@ -245,6 +550,9 @@
                 waitingScreen.style.display = 'none';
                 loginCard.style.display = 'block';
                 startSoftHearts();
+                
+                // Mostrar botón para configurar nombre
+                showNameConfig();
             } else {
                 // Aún no es la fecha - mostrar pantalla de espera
                 waitingScreen.style.display = 'block';
@@ -261,7 +569,6 @@
                 const diff = UNLOCK_DATE - now;
                 
                 if (diff <= 0) {
-                    // La fecha llegó, recargar página
                     location.reload();
                     return;
                 }
@@ -274,7 +581,6 @@
                 document.getElementById('countdownHours').textContent = hours;
                 document.getElementById('countdownMinutes').textContent = minutes;
                 
-                // Efecto de animación
                 if (days <= 7) {
                     document.getElementById('countdown').style.background = 'linear-gradient(135deg, #fff0f5, #ffe4ec)';
                     document.getElementById('countdown').style.animation = 'pulse 2s infinite';
@@ -282,26 +588,87 @@
             }
             
             updateCountdown();
-            setInterval(updateCountdown, 60000); // Actualizar cada minuto
+            setInterval(updateCountdown, 60000);
         }
         
-        // ========== CREAR CORAZONES ==========
-        function createSoftHearts() {
-            if (heartsCreated >= MAX_HEARTS) return;
-            const container = document.getElementById('heartsBg');
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = '❤️';
-            heart.style.left = `${Math.random() * 100}%`;
-            const size = Math.random() * 15 + 10;
-            heart.style.fontSize = `${size}px`;
-            const duration = Math.random() * 6 + 8;
-            heart.style.animationDuration = `${duration}s`;
-            heart.style.animationDelay = `${Math.random() * 2}s`;
-            heart.style.opacity = Math.random() * 0.3 + 0.2;
-            container.appendChild(heart);
-            heartsCreated++;
-            setTimeout(() => { heart.remove(); heartsCreated--; }, duration * 1000);
+        // ========== ACCESO SECRETO ==========
+        function setupSecretAccess() {
+            const toggleBtn = document.getElementById('secretToggle');
+            const secretLogin = document.getElementById('secretLogin');
+            const secretBtn = document.getElementById('secretBtn');
+            const secretInput = document.getElementById('secretCode');
+            const secretError = document.getElementById('secretError');
+            
+            // Mostrar/ocultar login secreto
+            toggleBtn.addEventListener('click', function() {
+                secretLogin.style.display = secretLogin.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            // Verificar código secreto
+            secretBtn.addEventListener('click', function() {
+                const code = secretInput.value.trim();
+                
+                if (code === SECRET_CODE) {
+                    // Código correcto - mostrar configurador de nombre
+                    showNameConfig();
+                    secretLogin.style.display = 'none';
+                    secretInput.value = '';
+                    secretError.textContent = '';
+                    
+                    // Forzar mostrar login normal
+                    document.getElementById('waitingScreen').style.display = 'none';
+                    document.getElementById('loginCard').style.display = 'block';
+                    
+                    // Guardar en localStorage para futuras sesiones
+                    localStorage.setItem('adminAccess', 'granted');
+                    
+                } else {
+                    secretError.textContent = 'Código incorrecto';
+                    secretInput.style.borderColor = 'red';
+                    setTimeout(() => secretInput.style.borderColor = '', 1000);
+                }
+            });
+            
+            // Enter para enviar
+            secretInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') secretBtn.click();
+            });
+        }
+        
+        // ========== CONFIGURADOR DE NOMBRE ==========
+        function showNameConfig() {
+            // Si ya hay nombre guardado, usarlo
+            const savedName = localStorage.getItem('correctName');
+            if (savedName) {
+                correctName = savedName;
+                return;
+            }
+            
+            // Crear popup para configurar nombre
+            const configPopup = document.createElement('div');
+            configPopup.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 2000;">
+                    <div style="background: white; padding: 30px; border-radius: 15px; max-width: 400px; width: 90%; text-align: center;">
+                        <h3 style="color: #ff66a3; margin-bottom: 15px;">Configurar Acceso</h3>
+                        <p style="color: #8b5a7c; margin-bottom: 20px;">¿Qué nombre debe escribir ella para entrar?</p>
+                        <input type="text" id="nameConfigInput" style="width: 100%; padding: 12px; border: 2px solid #ffc2d1; border-radius: 8px; margin-bottom: 15px; text-align: center;" placeholder="Ejemplo: mailyn">
+                        <button id="saveNameBtn" style="background: #4CAF50; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 1rem;">Guardar Nombre</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(configPopup);
+            
+            // Guardar nombre
+            document.getElementById('saveNameBtn').addEventListener('click', function() {
+                const name = document.getElementById('nameConfigInput').value.trim().toLowerCase();
+                if (name) {
+                    correctName = name;
+                    localStorage.setItem('correctName', name);
+                    configPopup.remove();
+                    alert('✅ Nombre guardado: ' + name);
+                }
+            });
         }
         
         // ========== VERIFICAR NOMBRE ==========
@@ -310,14 +677,20 @@
             const errorMsg = document.getElementById('errorMsg');
             const enteredName = nameInput.value.trim().toLowerCase();
             
-            if (enteredName === CORRECT_NAME) {
+            if (!correctName) {
+                errorMsg.textContent = 'Error: Nombre no configurado. Usa el acceso secreto.';
+                errorMsg.style.opacity = '1';
+                return;
+            }
+            
+            if (enteredName === correctName) {
                 errorMsg.style.opacity = '0';
                 showMainContent();
             } else if (enteredName === '') {
                 errorMsg.textContent = 'Por favor, escribe tu nombre';
                 errorMsg.style.opacity = '1';
             } else {
-                errorMsg.textContent = 'Nombre incorrecto. Solo Mailyn puede ver esto.';
+                errorMsg.textContent = 'Nombre incorrecto';
                 errorMsg.style.opacity = '1';
                 nameInput.style.animation = 'shake 0.4s';
                 setTimeout(() => nameInput.style.animation = '', 400);
@@ -337,13 +710,31 @@
             }, 500);
         }
         
-        // ========== INICIAR CORAZONES ==========
+        // ========== FUNCIONES DE CORAZONES ==========
+        function createSoftHearts() {
+            if (heartsCreated >= MAX_HEARTS) return;
+            const container = document.getElementById('heartsBg');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = `${Math.random() * 100}%`;
+            const size = Math.random() * 15 + 10;
+            heart.style.fontSize = `${size}px`;
+            const duration = Math.random() * 6 + 8;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.animationDelay = `${Math.random() * 2}s`;
+            heart.style.opacity = Math.random() * 0.3 + 0.2;
+            container.appendChild(heart);
+            heartsCreated++;
+            setTimeout(() => { heart.remove(); heartsCreated--; }, duration * 1000);
+        }
+        
         function startSoftHearts() {
             for (let i = 0; i < 5; i++) setTimeout(createSoftHearts, i * 300);
             setInterval(() => { if (heartsCreated < MAX_HEARTS) createSoftHearts(); }, 2000);
         }
         
-        // ========== ABRIR CARTA ==========
+        // ========== FUNCIONES RESTANTES ==========
         function openLetter() {
             const letterClosed = document.getElementById('letterClosed');
             const letterOpened = document.getElementById('letterOpened');
@@ -356,7 +747,6 @@
             }, 400);
         }
         
-        // ========== CORAZONES ESPECIALES ==========
         function createSpecialHearts() {
             for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
@@ -380,7 +770,6 @@
             }
         }
         
-        // ========== EFECTO DEL BOTÓN DE AMOR ==========
         function createLoveEffect() {
             const heartBtn = document.getElementById('heartBtn');
             heartBtn.innerHTML = '<i class="fas fa-heart"></i> ¡TE AMO CON TODO MI SER! 😳💖';
@@ -393,7 +782,6 @@
             setTimeout(() => { heartBtn.style.transform = 'scale(1)'; }, 2000);
         }
         
-        // ========== EXPLOSIÓN DE CORAZONES ==========
         function createHeartExplosion() {
             for (let i = 0; i < 12; i++) {
                 setTimeout(() => {
@@ -423,34 +811,40 @@
         
         // ========== INICIALIZAR ==========
         document.addEventListener('DOMContentLoaded', function() {
-            // Verificar fecha primero
+            // Verificar fecha
             checkDate();
             
-            // Crear corazones iniciales
+            // Configurar acceso secreto
+            setupSecretAccess();
+            
+            // Cargar nombre si existe
+            const savedName = localStorage.getItem('correctName');
+            if (savedName) correctName = savedName;
+            
+            // Si ya hay acceso admin, mostrar login
+            if (localStorage.getItem('adminAccess') === 'granted') {
+                document.getElementById('waitingScreen').style.display = 'none';
+                document.getElementById('loginCard').style.display = 'block';
+            }
+            
+            // Corazones iniciales
             for (let i = 0; i < 8; i++) setTimeout(createSoftHearts, i * 400);
             
-            // Evento para el botón Continuar (solo si está visible)
+            // Event listeners
             document.getElementById('continueBtn').addEventListener('click', checkName);
-            
-            // Evento para Enter en el input
-            document.getElementById('nameInput')?.addEventListener('keypress', function(e) {
+            document.getElementById('nameInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') checkName();
             });
+            document.getElementById('letterClosed').addEventListener('click', openLetter);
+            document.getElementById('heartBtn').addEventListener('click', createLoveEffect);
             
-            // Evento para abrir carta (solo si está visible)
-            document.getElementById('letterClosed')?.addEventListener('click', openLetter);
-            
-            // Evento para botón de amor (solo si está visible)
-            document.getElementById('heartBtn')?.addEventListener('click', createLoveEffect);
-            
-            // Efecto en input al enfocar
             const nameInput = document.getElementById('nameInput');
             if (nameInput) {
                 nameInput.addEventListener('focus', function() { this.style.transform = 'scale(1.02)'; });
                 nameInput.addEventListener('blur', function() { this.style.transform = 'scale(1)'; });
             }
             
-            // Añadir estilos CSS para countdown
+            // Estilos para countdown
             const countdownStyle = document.createElement('style');
             countdownStyle.textContent = `
                 .countdown-item {
@@ -481,13 +875,6 @@
                 @keyframes pulse {
                     0%, 100% { transform: scale(1); }
                     50% { transform: scale(1.02); }
-                }
-                @media (max-width: 480px) {
-                    .countdown-value {
-                        width: 50px;
-                        height: 50px;
-                        font-size: 1.5rem;
-                    }
                 }
             `;
             document.head.appendChild(countdownStyle);
