@@ -1,184 +1,681 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Niña Hermosa 💕</title>
+    <title>Para Mi Princesa Hermosa 💕</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&family=Satisfy&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #ffb6c1, #ffc0cb); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; color: #8b5a7c; }
-        .hearts-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
-        .heart { position: absolute; color: rgba(255, 105, 180, 0.4); font-size: 20px; animation: float 8s linear infinite; opacity: 0.5; }
-        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
-        .container { width: 100%; max-width: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #ffb6c1 0%, #ffafcc 25%, #ffc2d1 50%, #ffccd5 100%); 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+            color: #8b5a7c; 
+            overflow-x: hidden;
+        }
         
-        /* PANTALLA DE ESPERA */
-        .waiting-screen {
-            background: white;
-            border-radius: 20px;
+        /* Fondo de corazones animados */
+        .hearts-bg { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: -1; 
+        }
+        .heart { 
+            position: absolute; 
+            color: rgba(255, 105, 180, 0.5); 
+            font-size: 20px; 
+            animation: float 8s linear infinite; 
+            opacity: 0.6; 
+        }
+        @keyframes float { 
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; } 
+            10% { opacity: 0.6; } 
+            90% { opacity: 0.6; } 
+            100% { transform: translateY(-100px) rotate(360deg) scale(1); opacity: 0; } 
+        }
+        
+        /* Contenedor principal */
+        .container { 
+            width: 100%; 
+            max-width: 520px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            position: relative;
+        }
+        
+        /* Tarjeta principal */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
             padding: 40px 30px;
             width: 100%;
-            box-shadow: 0 15px 30px rgba(214, 51, 132, 0.2);
+            box-shadow: 0 20px 40px rgba(214, 51, 132, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
             border: 3px solid #ffafcc;
             text-align: center;
-            display: none;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: transform 0.5s, box-shadow 0.5s;
         }
-        .waiting-screen::before {
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(214, 51, 132, 0.4),
+                        0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+        }
+        .card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #ffafcc, #ffc2d1);
-            border-radius: 20px 20px 0 0;
+            top: 0; 
+            left: 0; 
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #ffafcc, #ffc2d1, #ffafcc);
+            border-radius: 25px 25px 0 0;
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: rgba(255, 175, 204, 0.4);
+            border-radius: 50%;
+        }
+        
+        /* Títulos y texto */
+        .main-title { 
+            font-family: 'Satisfy', cursive; 
+            font-size: 3.2rem; 
+            color: #ff66a3; 
+            margin-bottom: 10px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffc2d1, transparent);
+        }
+        .subtitle { 
+            color: #b76e9a; 
+            font-size: 1.1rem; 
+            margin-bottom: 25px; 
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        
+        /* Pantalla de espera */
+        .waiting-screen {
+            display: none;
         }
         .lock-icon {
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: #ff66a3;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         .date-display {
-            background: #fff5f7;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
+            background: linear-gradient(135deg, #fff5f7, #ffe4ec);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
             border: 2px solid #ffc2d1;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .date-display::before {
+            content: '💕';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            font-size: 3rem;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+        .date-display::after {
+            content: '💖';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 3rem;
+            opacity: 0.2;
+            transform: rotate(15deg);
         }
         .date-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ff66a3;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ff3366;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         .date-label {
             color: #b76e9a;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             margin-top: 5px;
+            font-weight: 600;
         }
         
-        /* LOGIN SECRETO (PARA TÍ) */
-        .secret-login {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            padding: 15px;
-            width: 250px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border: 2px solid #4CAF50;
-            display: none;
-            z-index: 1000;
+        /* Contador */
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px solid #ffafcc;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .secret-login h4 {
-            color: #4CAF50;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            text-align: center;
+        .countdown-title {
+            font-size: 1.5rem;
+            color: #ff66a3;
+            margin-bottom: 15px;
+            font-family: 'Satisfy', cursive;
         }
-        .secret-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #4CAF50;
-            border-radius: 5px;
-            font-size: 0.9rem;
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .countdown-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ff3366;
+            background: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 8px;
-            text-align: center;
+            border: 3px solid #ffc2d1;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
-        .secret-btn {
-            background: #4CAF50;
+        .countdown-label {
+            font-size: 0.85rem;
+            color: #b76e9a;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Login normal */
+        .login-card {
+            display: none;
+        }
+        .input-group {
+            margin: 30px 0;
+            position: relative;
+        }
+        .input-label { 
+            display: block; 
+            color: #ff66a3; 
+            font-weight: 600; 
+            margin-bottom: 15px; 
+            font-size: 1.2rem;
+            font-family: 'Satisfy', cursive;
+        }
+        .name-input { 
+            width: 100%; 
+            padding: 18px; 
+            border: 2px solid #ffc2d1; 
+            border-radius: 15px; 
+            font-size: 1.2rem; 
+            text-align: center; 
+            outline: none; 
+            transition: all 0.3s; 
+            background: #fff9fb;
+            font-family: 'Poppins', sans-serif;
+        }
+        .name-input:focus { 
+            border-color: #ff66a3; 
+            box-shadow: 0 0 0 4px rgba(255, 102, 163, 0.2);
+            transform: scale(1.02);
+        }
+        .name-input::placeholder {
+            color: #d8a8c5;
+        }
+        
+        /* Botones */
+        .btn {
+            background: linear-gradient(135deg, #ff66a3, #ff8fab);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 8px;
-            font-size: 0.9rem;
-            width: 100%;
+            border-radius: 15px;
+            padding: 18px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
         }
-        .secret-btn:hover { background: #45a049; }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+        .btn:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 25px rgba(255, 102, 163, 0.4);
+            background: linear-gradient(135deg, #ff4d94, #ff7ba3);
+        }
+        .btn:active {
+            transform: translateY(-2px);
+        }
+        .heart-btn {
+            background: linear-gradient(135deg, #ff3366, #ff6699);
+            margin-top: 20px;
+        }
         
-        /* BOTÓN SECRETO */
+        /* Mensaje de error */
+        .error-msg { 
+            color: #ff3333; 
+            margin-top: 15px; 
+            font-size: 0.95rem; 
+            min-height: 20px; 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 51, 51, 0.1);
+        }
+        
+        /* Contenido principal */
+        .main-content { 
+            display: none; 
+            width: 100%; 
+            animation: fadeIn 1s; 
+            text-align: center; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .content-header { 
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .content-title { 
+            font-family: 'Satisfy', cursive; 
+            font-size: 3rem; 
+            color: #ff66a3; 
+            margin-bottom: 15px; 
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Contador de tiempo juntos */
+        .time-counter {
+            background: linear-gradient(135deg, #fff5f7, #ffe4ec);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border: 2px solid #ffafcc;
+            position: relative;
+            overflow: hidden;
+        }
+        .time-counter::before {
+            content: '💖';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+        .counter-title { 
+            font-family: 'Satisfy', cursive; 
+            font-size: 2.5rem; 
+            color: #ff66a3; 
+            margin-bottom: 15px; 
+        }
+        .counter-number { 
+            font-size: 4.5rem; 
+            font-weight: 800; 
+            color: #ff3366; 
+            margin: 15px 0; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .counter-label { 
+            font-size: 1.8rem; 
+            color: #b76e9a; 
+            font-weight: 600;
+        }
+        .counter-subtitle {
+            font-size: 1.1rem;
+            color: #8b5a7c;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        /* Carta de amor */
+        .letter-container {
+            position: relative;
+            margin: 30px 0;
+            perspective: 1000px;
+        }
+        .letter-closed { 
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 2px solid #ffafcc;
+            cursor: pointer;
+            transition: all 0.5s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .letter-closed:hover { 
+            transform: translateY(-10px) rotateX(5deg); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+        .letter-seal { 
+            width: 90px; 
+            height: 90px; 
+            background: linear-gradient(135deg, #ff66a3, #ff8fab); 
+            border-radius: 50%; 
+            margin: 0 auto 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-size: 2.2rem; 
+            border: 4px solid white; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            animation: sealPulse 3s infinite;
+        }
+        @keyframes sealPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .letter-closed h3 {
+            color: #ff66a3;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-family: 'Satisfy', cursive;
+        }
+        .letter-instruction { 
+            color: #b76e9a; 
+            margin-top: 15px; 
+            font-size: 1rem; 
+            font-style: italic;
+        }
+        .letter-opened { 
+            display: none; 
+            background: #fffefc;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 2px solid #ffafcc;
+            animation: openLetter 1s;
+            text-align: left;
+            position: relative;
+        }
+        .letter-opened::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffc2d1' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+            pointer-events: none;
+            border-radius: 20px;
+        }
+        @keyframes openLetter { 
+            0% { transform: scale(0.8) rotateX(-30deg); opacity: 0; } 
+            100% { transform: scale(1) rotateX(0); opacity: 1; } 
+        }
+        .letter-content { 
+            font-size: 1.15rem; 
+            line-height: 1.8; 
+            color: #5a3d5c; 
+            position: relative;
+            z-index: 1;
+        }
+        .letter-content p { 
+            margin-bottom: 22px; 
+            padding-left: 20px; 
+            border-left: 4px solid #ffc2d1; 
+            position: relative;
+        }
+        .letter-content p::before {
+            content: '❤️';
+            position: absolute;
+            left: -15px;
+            top: 0;
+            font-size: 1rem;
+        }
+        .letter-signature { 
+            font-family: 'Satisfy', cursive; 
+            font-size: 2.5rem; 
+            text-align: right; 
+            color: #ff66a3; 
+            margin-top: 35px; 
+            padding-top: 20px;
+            border-top: 2px dashed #ffc2d1;
+        }
+        
+        /* Sección especial final */
+        .special-section {
+            background: linear-gradient(135deg, #fff5f7, #ffe4ec);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border: 2px solid #ffafcc;
+            position: relative;
+            overflow: hidden;
+        }
+        .special-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            animation: moveBackground 20s linear infinite;
+        }
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+        .love-message { 
+            font-family: 'Satisfy', cursive; 
+            font-size: 2.8rem; 
+            color: #ff3366; 
+            margin-bottom: 20px; 
+            line-height: 1.3; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .special-text { 
+            font-size: 1.4rem; 
+            color: #8b5a7c; 
+            margin: 20px 0; 
+            padding: 15px; 
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px; 
+            border-left: 5px solid #ff66a3;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* Footer */
+        footer { 
+            text-align: center; 
+            padding: 25px; 
+            color: #b76e9a; 
+            font-size: 1rem; 
+            margin-top: 20px; 
+            width: 100%;
+            border-top: 2px dashed #ffc2d1;
+        }
+        footer p { margin: 8px 0; }
+        .footer-heart {
+            color: #ff66a3;
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Secreto y admin */
         .secret-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #4CAF50;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1rem;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
             cursor: pointer;
             z-index: 1001;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
         }
-        
-        /* LOGIN NORMAL (PARA ELLA) */
-        .login-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 100%;
-            box-shadow: 0 15px 30px rgba(214, 51, 132, 0.2);
-            border: 3px solid #ffafcc;
-            text-align: center;
-            margin-bottom: 20px;
+        .secret-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .secret-login {
+            position: fixed;
+            bottom: 90px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 20px;
+            width: 280px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 3px solid #4CAF50;
             display: none;
+            z-index: 1000;
+            animation: slideUp 0.3s;
         }
-        .login-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #ffafcc, #ffc2d1);
-            border-radius: 20px 20px 0 0;
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-        .main-title { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff66a3; margin-bottom: 15px; }
-        .subtitle { color: #b76e9a; font-size: 1rem; margin-bottom: 25px; }
-        .input-group { margin: 25px 0; }
-        .input-label { display: block; color: #ff66a3; font-weight: 600; margin-bottom: 10px; font-size: 1.1rem; }
-        .name-input { width: 100%; padding: 15px; border: 2px solid #ffc2d1; border-radius: 12px; font-size: 1.1rem; text-align: center; outline: none; transition: all 0.3s; background: #fff9fb; }
-        .name-input:focus { border-color: #ff66a3; box-shadow: 0 0 0 3px rgba(255, 102, 163, 0.2); }
-        .continue-btn { background: linear-gradient(135deg, #ff66a3, #ff8fab); color: white; border: none; border-radius: 12px; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 10px; font-family: 'Poppins', sans-serif; }
-        .continue-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 102, 163, 0.3); }
-        .error-msg { color: #ff3333; margin-top: 15px; font-size: 0.9rem; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
+        .secret-login h4 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .secret-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            text-align: center;
+            background: #f9fff9;
+        }
+        .secret-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .secret-btn:hover { 
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            transform: translateY(-2px);
+        }
         
-        /* CONTENIDO PRINCIPAL */
-        .main-content { display: none; width: 100%; animation: fadeIn 1s; text-align: center; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .content-header { margin-bottom: 25px; }
-        .content-title { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ff66a3; margin-bottom: 10px; }
-        .simple-counter { background: white; border-radius: 15px; padding: 25px; margin: 20px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #ffafcc; }
-        .counter-title { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ff66a3; margin-bottom: 15px; }
-        .counter-number { font-size: 4rem; font-weight: 700; color: #ff66a3; margin: 10px 0; }
-        .counter-label { font-size: 1.5rem; color: #b76e9a; }
-        .letter-closed { background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 2px solid #ffafcc; cursor: pointer; transition: all 0.3s; }
-        .letter-closed:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-        .letter-seal { width: 70px; height: 70px; background: linear-gradient(135deg, #ff66a3, #ff8fab); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .letter-instruction { color: #b76e9a; margin-top: 10px; font-size: 0.9rem; }
-        .letter-opened { display: none; background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 2px solid #ffafcc; animation: openLetter 0.8s; text-align: left; }
-        @keyframes openLetter { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .letter-content { font-size: 1.1rem; line-height: 1.7; color: #5a3d5c; }
-        .letter-content p { margin-bottom: 18px; padding-left: 15px; border-left: 3px solid #ffc2d1; }
-        .letter-signature { font-family: 'Dancing Script', cursive; font-size: 2rem; text-align: right; color: #ff66a3; margin-top: 25px; }
-        .final-special { background: white; border-radius: 15px; padding: 25px; margin: 25px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #ffafcc; text-align: center; }
-        .love-message { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff66a3; margin-bottom: 15px; line-height: 1.3; }
-        .special-text { font-size: 1.3rem; color: #8b5a7c; margin: 15px 0; padding: 10px; background: #fff5f7; border-radius: 10px; border-left: 4px solid #ff66a3; }
-        .heart-btn { background: linear-gradient(135deg, #ff66a3, #ff8fab); color: white; border: none; border-radius: 12px; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; margin-top: 15px; font-family: 'Poppins', sans-serif; }
-        .heart-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 102, 163, 0.4); }
-        footer { text-align: center; padding: 20px; color: #b76e9a; font-size: 0.9rem; margin-top: 10px; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        @media (max-width: 480px) {
-            .login-card, .waiting-screen { padding: 30px 20px; }
-            .main-title, .content-title { font-size: 2.3rem; }
-            .counter-number { font-size: 3.2rem; }
-            .love-message { font-size: 2rem; }
-            .special-text { font-size: 1.1rem; }
-            .lock-icon { font-size: 3rem; }
-            .date-number { font-size: 2rem; }
-            .secret-login { width: 90%; right: 5%; left: 5%; }
+        /* Animaciones adicionales */
+        @keyframes shake { 
+            0%, 100% { transform: translateX(0); } 
+            25% { transform: translateX(-8px); } 
+            75% { transform: translateX(8px); } 
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            .card { padding: 30px 20px; border-radius: 20px; }
+            .main-title { font-size: 2.5rem; }
+            .content-title { font-size: 2.3rem; }
+            .counter-number { font-size: 3.5rem; }
+            .love-message { font-size: 2.2rem; }
+            .special-text { font-size: 1.2rem; }
+            .lock-icon { font-size: 3.5rem; }
+            .date-number { font-size: 2.5rem; }
+            .secret-login { width: calc(100% - 40px); right: 20px; left: 20px; }
+            .countdown-value { width: 60px; height: 60px; font-size: 1.8rem; }
+            .letter-seal { width: 80px; height: 80px; font-size: 1.8rem; }
+            .letter-content p { padding-left: 15px; font-size: 1.05rem; }
+        }
+        @media (max-width: 400px) {
+            .main-title { font-size: 2rem; }
+            .content-title { font-size: 1.8rem; }
+            .countdown-grid { grid-template-columns: 1fr; gap: 10px; }
+            .counter-number { font-size: 3rem; }
         }
     </style>
 </head>
@@ -193,109 +690,125 @@
     
     <!-- Login secreto para ti -->
     <div class="secret-login" id="secretLogin">
-        <h4>ACCESO ADMIN</h4>
-        <input type="password" class="secret-input" id="secretCode" placeholder="Código:">
-        <button class="secret-btn" id="secretBtn">Acceder</button>
-        <div id="secretError" style="color: red; font-size: 0.8rem; margin-top: 5px;"></div>
+        <h4>ACCESO ADMINISTRADOR</h4>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:15px;">Solo para mi amor</p>
+        <input type="password" class="secret-input" id="secretCode" placeholder="Código especial">
+        <button class="secret-btn" id="secretBtn">Acceso Especial</button>
+        <div id="secretError" style="color: red; font-size: 0.85rem; margin-top: 10px; min-height: 20px;"></div>
     </div>
     
     <!-- Contenedor principal -->
     <div class="container">
         <!-- Pantalla de espera (antes del 15/02/26) -->
-        <div class="waiting-screen" id="waitingScreen">
+        <div class="card waiting-screen" id="waitingScreen">
             <div class="lock-icon">
                 <i class="fas fa-lock"></i>
             </div>
-            <h1 class="main-title">Próximamente...</h1>
-            <p class="subtitle">Esta sorpresa especial se desbloqueará en una fecha muy importante</p>
+            <h1 class="main-title">Un Regalo de Amor</h1>
+            <p class="subtitle">Esta sorpresa especial se desbloqueará en una fecha muy importante para nosotros</p>
             
             <div class="date-display">
                 <div class="date-number">15</div>
                 <div class="date-label">DE FEBRERO 2026</div>
             </div>
             
-            <div style="margin: 25px 0;">
-                <p style="color: #b76e9a; font-size: 1.1rem; margin-bottom: 15px;">
-                    <i class="fas fa-heart"></i> Guarda esta fecha en tu corazón
+            <div style="margin: 30px 0;">
+                <p style="color: #ff66a3; font-size: 1.2rem; margin-bottom: 15px;">
+                    <i class="fas fa-heart" style="color:#ff3366;"></i> Guarda esta fecha en tu corazón😳😳
                 </p>
-                <p style="color: #8b5a7c; font-size: 0.9rem;">
-                    Ese día podrás descubrir mi mensaje especial para ti
+                <p style="color: #8b5a7c; font-size: 1rem; line-height:1.5;">
+                    Ese día mágico podrás descubrir mi mensaje más especial para ti😳
                 </p>
             </div>
             
             <!-- Contador regresivo -->
-            <div id="countdown" style="background: #fff0f5; border-radius: 10px; padding: 15px; margin: 20px 0;">
-                <h3 style="color: #ff66a3; margin-bottom: 10px;">Faltan:</h3>
-                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <div class="countdown-container">
+                <h3 class="countdown-title">Faltan solo...</h3>
+                <div class="countdown-grid">
                     <div class="countdown-item">
                         <div class="countdown-value" id="countdownDays">0</div>
-                        <div class="countdown-label">DÍAS</div>
+                        <div class="countdown-label">Días</div>
                     </div>
                     <div class="countdown-item">
                         <div class="countdown-value" id="countdownHours">0</div>
-                        <div class="countdown-label">HORAS</div>
+                        <div class="countdown-label">Horas</div>
                     </div>
                     <div class="countdown-item">
                         <div class="countdown-value" id="countdownMinutes">0</div>
-                        <div class="countdown-label">MINUTOS</div>
+                        <div class="countdown-label">Minutos</div>
                     </div>
                 </div>
             </div>
             
-            <p style="color: #ff66a3; font-style: italic; margin-top: 20px;">
+            <p style="color: #ff66a3; font-style: italic; margin-top: 25px; font-size: 1.1rem;">
                 Te espero con todo mi amor para ese día especial 💖
             </p>
         </div>
         
         <!-- Login normal (después del 15/02/26) -->
-        <div class="login-card" id="loginCard">
-            <h1 class="main-title">Para Mi Niña Hermosa</h1>
-            <p class="subtitle">Este mensaje es solo para ti</p>
+        <div class="card login-card" id="loginCard">
+            <h1 class="main-title">Para Mi Princesa</h1>
+            <p class="subtitle">Este mensaje está escrito solo para ti, mi amor</p>
             
             <div class="input-group">
-                <label class="input-label">COLOCA TU NOMBRE ACA MI VIDA</label>
-                <input type="text" class="name-input" id="nameInput" placeholder="Escribe aquí..." autocomplete="off">
+                <label class="input-label">Escribe tu nombre aquí, mi vida</label>
+                <input type="text" class="name-input" id="nameInput" placeholder="Tu nombre especial..." autocomplete="off">
             </div>
             
-            <button class="continue-btn" id="continueBtn">Continuar</button>
+            <button class="btn" id="continueBtn">Continuar</button>
             <div class="error-msg" id="errorMsg"></div>
+            
+            <div style="margin-top: 25px; color: #b76e9a; font-size: 0.9rem;">
+                <i class="fas fa-heart" style="color:#ff66a3;"></i> Solo tú puedes acceder a este lugar especial
+            </div>
         </div>
         
         <!-- Contenido principal -->
         <div class="main-content" id="mainContent">
             <div class="content-header">
-                <h1 class="content-title">PARA MI NIÑAW HERMOSA OHSHI OHSHI 💖</h1>
+                <h1 class="content-title">Para Mi Niñita Hermosa 💖</h1>
+                <p class="subtitle" style="color:#ff66a3;">Mi amor por ti crece cada día más</p>
             </div>
-            <div class="simple-counter">
-                <h2 class="counter-title">Nuestro Tiempo</h2>
+            
+            <div class="time-counter">
+                <h2 class="counter-title">Nuestro Tiempo Juntos</h2>
                 <div class="counter-number">1</div>
-                <div class="counter-label">MES JUNTOS</div>
+                <div class="counter-label">MES DE FELICIDAD</div>
+                <p class="counter-subtitle">Y contando para siempre...</p>
             </div>
-            <div class="letter-closed" id="letterClosed">
-                <div class="letter-seal"><i class="fas fa-heart"></i></div>
-                <h3>Toca para abrir mi carta</h3>
-                <p class="letter-instruction">Haz clic en el corazón</p>
-            </div>
-            <div class="letter-opened" id="letterOpened">
-                <div class="letter-content">
-                    <p>MI NIÑAW HERMOSAW,</p>
-                    <p>PUEZZ KERIA DECIRTEWWW KEW BUENOW KE TEAMOWWWWWWWW MUCHO MI VIDAWW GRACIAZZZZZZZ POR SER LA MEJOR CHIKAWW DE VERDAWWWW AMOWWWWWWWWW COMO ME TRATAS SIEMPREWWW TAN TIERNA Y TAN LINDAWW KE HASTA SHO ME SONROJO😳😳, AMOW KUANDO ME DICES MI BEBESHITOW ME SONROJO MUCHOW😳</p>
-                    <p>AMOWWWWWWW KUANDO SIEMPRE JUWAMOS ROBLOXXXX DE VERDAD ME ENKANTAJUWAR CON VOS Y HABLAR KONTIKO TODO EL DIA ASLDKJASLKDAS, SIEMPRE PIENSO EN VOS TODO EL DIAW OHSHIOSHI😳😳.</p>
-                    <p>ESTE MESW HA SIDO COMO EL PRIMER CAPITULO DEL LIBRO MAS HERMOSOW. Y YA NO KIERO LEER OTRO LIBROW.... KIERO SEGUIR ESCRIBIENDO ESTA HISTORIA KONTIKO HASTA EL FINAL😳😳</p>
-                    <p>BUENOWW IIII LASKDJSLKADLKSA TE AMO DEMASIADOWWW MI NIÑAW HERMOSAWWWWPRECIOSAWMIREINAWWDIOZZ ZKLEKLJELKJELKJE .</p>
-                    <p>MWAH MWAH BEZITOZ TE AMOW.</p>
-                    <div class="letter-signature">Con todo mi amor ❤️</div>
+            
+            <div class="letter-container">
+                <div class="letter-closed" id="letterClosed">
+                    <div class="letter-seal"><i class="fas fa-heart"></i></div>
+                    <h3>MI KARTA DE AMOW PARA TI 😳😳😳</h3>
+                    <p class="letter-instruction">Toca el corazón para abrir mi carta</p>
+                </div>
+                <div class="letter-opened" id="letterOpened">
+                    <div class="letter-content">
+                        <p>MI NIÑAW HERMOSA,</p>
+                        <p>KIERO KE SEPASWWWWWWWWWW KE TE AMOWWWWW MUCHOW MI VIDAW UN MONTONNNNN PUEZZZ GRACIAZZ POR SER LA MEJOR CHIKAW DEL MUNDO MI LINDAWWW PRECIOSAW😳😳 QLKWJDKLQWJDQLWKJD TEAMOW.</p>
+                        <p>DE VERDAWW ME ENCANTA KUANDO JUWAMOS ROBLOX KJEKJKJE Y AMOWWD VERDAD HABLAR CON VOS TODO EL DIAW PORKE TE AMOW MUCHIIO OK QWDLKQWJDWQD Y A AMOW COMO ME TRATAS DIOSSS PERO KE CHIKA TAN TIERNA😳 MEMUERO I HASTA ME SONROJO😳😳😳, TAN TIERNAWWWW AKLDJSAKLDJSA.</p>
+                        <p>ESTE MESW HA SIDO COMO EL PRIMER CAPITULO DEL LIBRO MAS HERMOSOW. Y YA NO KIERO LEER OTRO LIBROW.... KIERO SEGUIR ESCRIBIENDO ESTA HISTORIA KONTIKO HASTA EL FINAL😳😳.</p>
+                        <p>BUENOWW IIII LASKDJSLKADLKSA TE AMO DEMASIADOWWW Y TE ADOROWWWWWWWW DEMASIADOWWWWWW MI NIÑAW HERMOSAW PRECIOSAWWWWWW DIVNAWWWW KJEKJEKJEZKLEKLJELKJELKJE.</p>
+                        <p>MWAH MWAH BEZHITOZ.</p>
+                        <div class="letter-signature">Con todo mi amor ❤️</div>
+                    </div>
                 </div>
             </div>
-            <div class="final-special">
-                <h2 class="love-message">TEAMOWWWWW CON TODO MI CORAZON 💖</h2>
-                <div class="special-text">MI NIÑAW SOS LA MEJOR CHICA DEL MUNDO 😳</div>
-                <div class="special-text" style="background: #fff0f5; font-size: 1.1rem;">Cada día me haces el chico más feliz del universo 🌟</div>
-                <button class="heart-btn" id="heartBtn"><i class="fas fa-heartbeat"></i> TE AMO DEMASIADO MI VIDA</button>
+            
+            <div class="special-section">
+                <h2 class="love-message">TE AMOW CON TODOW MI SER JEKJEKJEE 💖</h2>
+                <div class="special-text">SOS LA MEJOR CHIKAW KE HE TENIDOWWW KEJKEJE</di>
+                <div class="special-text">MWAH MWAH😳😳</div>
+                <button class="btn heart-btn" id="heartBtn">
+                    <i class="fas fa-heartbeat"></i> ¡TE AMO DEMASIADO, MI VIDA!
+                </button>
             </div>
+            
             <footer>
-                <p>ERES MI PERSONA FAVORITA 💕</p>
-                <p>SIEMPRE A TU LADO</p>
+                <p><span class="footer-heart">❤️</span> MAS BESOW MWAH MWAH😳😳😳 <span class="footer-heart">❤️</span></p>
+                <p>Y BUENO KERIA DECIRTE KE SIEMPRE ESTARE A TU LADOW MI MINIÑAW HERMOSAW</p>
+                <p style="margin-top:15px; font-size:0.9rem; color:#ff66a3;">Hecho con todo mi amor para ti 💕</p>
             </footer>
         </div>
     </div>
@@ -306,7 +819,7 @@
         const SECRET_CODE = "150226901288021"; // Tu código secreto
         const CORRECT_NAME = "mailyn"; // Nombre que debe escribir ella
         let heartsCreated = 0;
-        const MAX_HEARTS = 15;
+        const MAX_HEARTS = 20;
         
         // ========== VERIFICAR FECHA ==========
         function checkDate() {
@@ -318,13 +831,13 @@
                 // Fecha alcanzada - mostrar login
                 waitingScreen.style.display = 'none';
                 loginCard.style.display = 'block';
-                startSoftHearts();
+                startHearts();
             } else {
                 // Aún no es la fecha - mostrar pantalla de espera
                 waitingScreen.style.display = 'block';
                 loginCard.style.display = 'none';
                 startCountdown();
-                startSoftHearts();
+                startHearts();
             }
         }
         
@@ -347,14 +860,20 @@
                 document.getElementById('countdownHours').textContent = hours;
                 document.getElementById('countdownMinutes').textContent = minutes;
                 
+                // Efecto especial cuando faltan pocos días
                 if (days <= 7) {
-                    document.getElementById('countdown').style.background = 'linear-gradient(135deg, #fff0f5, #ffe4ec)';
-                    document.getElementById('countdown').style.animation = 'pulse 2s infinite';
+                    document.querySelector('.countdown-container').style.background = 'linear-gradient(135deg, #ffe4ec, #ffd6e0)';
+                    document.querySelector('.countdown-container').style.animation = 'pulse 2s infinite';
+                }
+                
+                // Efecto especial cuando falta 1 día
+                if (days === 1) {
+                    document.querySelector('.date-display').style.animation = 'pulse 1s infinite';
                 }
             }
             
             updateCountdown();
-            setInterval(updateCountdown, 60000);
+            setInterval(updateCountdown, 60000); // Actualizar cada minuto
         }
         
         // ========== ACCESO SECRETO ==========
@@ -390,15 +909,22 @@
                     // Guardar en localStorage
                     localStorage.setItem('adminAccess', 'granted');
                     
-                    // Mostrar mensaje
+                    // Efecto de confeti
+                    createConfetti();
+                    
+                    // Mostrar mensaje especial
                     setTimeout(() => {
-                        alert('✅ Acceso administrador concedido\n\nLa página está desbloqueada para que puedas probarla.\n\nElla verá la pantalla de espera hasta el 15/02/2026.');
-                    }, 300);
+                        alert('🎉 ¡ACCESO ADMIN CONCEDIDO! 🎉\n\nAhora puedes probar toda la página.\n\nRecuerda que ella verá la pantalla de espera hasta el 15/02/2026.');
+                    }, 500);
                     
                 } else {
-                    secretError.textContent = 'Código incorrecto';
+                    secretError.textContent = 'Código incorrecto. Intenta de nuevo.';
                     secretInput.style.borderColor = 'red';
-                    setTimeout(() => secretInput.style.borderColor = '', 1000);
+                    secretInput.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        secretInput.style.borderColor = '';
+                        secretInput.style.animation = '';
+                    }, 500);
                 }
             });
             
@@ -425,13 +951,13 @@
                 errorMsg.style.opacity = '0';
                 showMainContent();
             } else if (enteredName === '') {
-                errorMsg.textContent = 'Por favor, escribe tu nombre';
+                errorMsg.textContent = 'Por favor, escribe tu nombre precioso';
                 errorMsg.style.opacity = '1';
             } else {
-                errorMsg.textContent = 'Nombre incorrecto';
+                errorMsg.textContent = 'Nombre incorrecto, mi amor. Intenta de nuevo.';
                 errorMsg.style.opacity = '1';
-                nameInput.style.animation = 'shake 0.4s';
-                setTimeout(() => nameInput.style.animation = '', 400);
+                nameInput.style.animation = 'shake 0.5s';
+                setTimeout(() => nameInput.style.animation = '', 500);
             }
         }
         
@@ -439,89 +965,87 @@
         function showMainContent() {
             const loginCard = document.getElementById('loginCard');
             const mainContent = document.getElementById('mainContent');
+            
+            // Efecto de desvanecimiento
             loginCard.style.opacity = '0';
-            loginCard.style.transform = 'scale(0.95)';
+            loginCard.style.transform = 'scale(0.9)';
+            loginCard.style.transition = 'all 0.8s';
+            
             setTimeout(() => {
                 loginCard.style.display = 'none';
                 mainContent.style.display = 'block';
-                startSoftHearts();
+                
+                // Efecto de entrada del contenido principal
+                mainContent.style.animation = 'fadeIn 1.5s';
+                
+                // Iniciar efectos especiales
+                startHearts();
+                createWelcomeHearts();
             }, 500);
         }
         
         // ========== FUNCIONES DE CORAZONES ==========
-        function createSoftHearts() {
+        function createHeart() {
             if (heartsCreated >= MAX_HEARTS) return;
+            
             const container = document.getElementById('heartsBg');
             const heart = document.createElement('div');
             heart.className = 'heart';
-            heart.innerHTML = '❤️';
+            
+            // Elegir un emoji de corazón aleatorio
+            const hearts = ['❤️', '💖', '💗', '💓', '💕', '💞', '💘', '💝', '🧡', '💛', '💚', '💙', '💜'];
+            const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.innerHTML = randomHeart;
+            
+            // Posición aleatoria
             heart.style.left = `${Math.random() * 100}%`;
-            const size = Math.random() * 15 + 10;
+            
+            // Tamaño aleatorio
+            const size = Math.random() * 20 + 15;
             heart.style.fontSize = `${size}px`;
-            const duration = Math.random() * 6 + 8;
+            
+            // Duración y animación aleatoria
+            const duration = Math.random() * 8 + 10;
             heart.style.animationDuration = `${duration}s`;
-            heart.style.animationDelay = `${Math.random() * 2}s`;
-            heart.style.opacity = Math.random() * 0.3 + 0.2;
+            heart.style.animationDelay = `${Math.random() * 3}s`;
+            
+            // Opacidad aleatoria
+            heart.style.opacity = Math.random() * 0.4 + 0.3;
+            
+            // Color aleatorio
+            const colors = ['#ff66a3', '#ff3366', '#ff8fab', '#ffafcc', '#ffc2d1'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            heart.style.color = randomColor;
+            
             container.appendChild(heart);
             heartsCreated++;
-            setTimeout(() => { heart.remove(); heartsCreated--; }, duration * 1000);
-        }
-        
-        function startSoftHearts() {
-            for (let i = 0; i < 5; i++) setTimeout(createSoftHearts, i * 300);
-            setInterval(() => { if (heartsCreated < MAX_HEARTS) createSoftHearts(); }, 2000);
-        }
-        
-        // ========== FUNCIONES RESTANTES ==========
-        function openLetter() {
-            const letterClosed = document.getElementById('letterClosed');
-            const letterOpened = document.getElementById('letterOpened');
-            letterClosed.style.opacity = '0';
-            letterClosed.style.transform = 'scale(0.9)';
+            
+            // Remover el corazón después de la animación
             setTimeout(() => {
-                letterClosed.style.display = 'none';
-                letterOpened.style.display = 'block';
-                createSpecialHearts();
-            }, 400);
+                if (heart.parentNode) {
+                    heart.remove();
+                    heartsCreated--;
+                }
+            }, duration * 1000);
         }
         
-        function createSpecialHearts() {
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '💖';
-                    heart.style.position = 'fixed';
-                    heart.style.left = '50%';
-                    heart.style.top = '50%';
-                    heart.style.fontSize = '25px';
-                    heart.style.color = '#ff66a3';
-                    heart.style.opacity = '0.7';
-                    heart.style.zIndex = '100';
-                    heart.style.transform = 'translate(-50%, -50%)';
-                    heart.style.animation = 'specialHeart 1.2s forwards';
-                    const style = document.createElement('style');
-                    style.textContent = `@keyframes specialHeart {0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }50% { opacity: 1; }100% { transform: translate(${Math.random() * 100 - 50}%, ${Math.random() * 100 - 150}%) scale(1); opacity: 0; }}`;
-                    document.head.appendChild(style);
-                    document.body.appendChild(heart);
-                    setTimeout(() => { heart.remove(); style.remove(); }, 1200);
-                }, i * 200);
+        function startHearts() {
+            // Crear corazones iniciales
+            for (let i = 0; i < 8; i++) {
+                setTimeout(createHeart, i * 400);
             }
+            
+            // Crear corazones continuamente
+            setInterval(() => {
+                if (heartsCreated < MAX_HEARTS) {
+                    createHeart();
+                }
+            }, 2000);
         }
         
-        function createLoveEffect() {
-            const heartBtn = document.getElementById('heartBtn');
-            heartBtn.innerHTML = '<i class="fas fa-heart"></i> ¡TE AMO CON TODO MI SER! 😳💖';
-            heartBtn.style.background = 'linear-gradient(135deg, #ff3366, #ff66a3)';
-            heartBtn.style.transform = 'scale(1.05)';
-            createHeartExplosion();
-            setTimeout(() => {
-                alert('💖 MI NIÑAW HERMOSA, SOS LO MEJOR QUE ME HA PASADO EN LA VIDA 💖\n\nTE AMO DEMASIADO, MI REINA PRECIOSA 😳');
-            }, 800);
-            setTimeout(() => { heartBtn.style.transform = 'scale(1)'; }, 2000);
-        }
-        
-        function createHeartExplosion() {
-            for (let i = 0; i < 12; i++) {
+        function createWelcomeHearts() {
+            // Efecto especial de corazones al entrar
+            for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.innerHTML = '💖';
@@ -530,20 +1054,218 @@
                     heart.style.top = '50%';
                     heart.style.fontSize = '30px';
                     heart.style.color = '#ff3366';
-                    heart.style.opacity = '0.8';
+                    heart.style.opacity = '0.9';
                     heart.style.zIndex = '1000';
                     heart.style.transform = 'translate(-50%, -50%)';
-                    heart.style.animation = `heartExplode${i} 1.8s forwards`;
+                    heart.style.animation = `floatUp 1.5s forwards`;
+                    
+                    // Añadir estilo de animación
                     const style = document.createElement('style');
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = 180 + Math.random() * 120;
-                    const endX = Math.cos(angle) * distance;
-                    const endY = Math.sin(angle) * distance;
-                    style.textContent = `@keyframes heartExplode${i} {0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.8; }50% { opacity: 1; }100% { transform: translate(${endX}px, ${endY}px) scale(1); opacity: 0; }}`;
+                    style.textContent = `
+                        @keyframes floatUp {
+                            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.9; }
+                            100% { transform: translate(${Math.random() * 200 - 100}px, -150px) scale(1.5); opacity: 0; }
+                        }
+                    `;
+                    
                     document.head.appendChild(style);
                     document.body.appendChild(heart);
-                    setTimeout(() => { heart.remove(); style.remove(); }, 1800);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                        if (style.parentNode) style.remove();
+                    }, 1500);
                 }, i * 150);
+            }
+        }
+        
+        function createConfetti() {
+            // Efecto de confeti para acceso admin
+            const confettiCount = 50;
+            const confettiColors = ['#ff66a3', '#ff3366', '#4CAF50', '#ffcc00', '#ff8fab'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = ['❤️', '💖', '🎉', '✨', '🌟', '💫'][Math.floor(Math.random() * 6)];
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.top = '0';
+                    confetti.style.fontSize = `${Math.random() * 20 + 15}px`;
+                    confetti.style.color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                    confetti.style.opacity = '0.9';
+                    confetti.style.zIndex = '10000';
+                    confetti.style.transform = 'translateY(0) rotate(0deg)';
+                    confetti.style.animation = `confettiFall ${Math.random() * 2 + 2}s linear forwards`;
+                    
+                    // Añadir estilo de animación
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes confettiFall {
+                            0% { transform: translateY(-100px) rotate(0deg); opacity: 0.9; }
+                            100% { transform: translateY(100vh) rotate(${Math.random() * 360}deg); opacity: 0; }
+                        }
+                    `;
+                    
+                    document.head.appendChild(style);
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) confetti.remove();
+                        if (style.parentNode) style.remove();
+                    }, 3000);
+                }, i * 50);
+            }
+        }
+        
+        // ========== FUNCIONES RESTANTES ==========
+        function openLetter() {
+            const letterClosed = document.getElementById('letterClosed');
+            const letterOpened = document.getElementById('letterOpened');
+            
+            // Efecto de apertura
+            letterClosed.style.opacity = '0';
+            letterClosed.style.transform = 'scale(0.8) rotateX(30deg)';
+            letterClosed.style.transition = 'all 0.8s';
+            
+            setTimeout(() => {
+                letterClosed.style.display = 'none';
+                letterOpened.style.display = 'block';
+                
+                // Efecto especial de corazones al abrir la carta
+                createLetterHearts();
+            }, 500);
+        }
+        
+        function createLetterHearts() {
+            // Efecto especial al abrir la carta
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💌';
+                    heart.style.position = 'fixed';
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.top = '50%';
+                    heart.style.fontSize = '25px';
+                    heart.style.color = '#ff66a3';
+                    heart.style.opacity = '0.8';
+                    heart.style.zIndex = '1000';
+                    heart.style.transform = 'translateY(-50%)';
+                    heart.style.animation = `letterHeart ${Math.random() * 1 + 1}s forwards`;
+                    
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes letterHeart {
+                            0% { transform: translateY(-50%) scale(0.5); opacity: 0.8; }
+                            100% { transform: translateY(${Math.random() * 100 - 200}px) scale(1.2); opacity: 0; }
+                        }
+                    `;
+                    
+                    document.head.appendChild(style);
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                        if (style.parentNode) style.remove();
+                    }, 1500);
+                }, i * 200);
+            }
+        }
+        
+        function createLoveEffect() {
+            const heartBtn = document.getElementById('heartBtn');
+            
+            // Cambiar texto del botón
+            heartBtn.innerHTML = '<i class="fas fa-heart"></i> ¡TE AMO CON TODO MI SER! 💖';
+            heartBtn.style.background = 'linear-gradient(135deg, #ff3366, #ff0040)';
+            heartBtn.style.transform = 'scale(1.1)';
+            heartBtn.style.boxShadow = '0 20px 30px rgba(255, 51, 102, 0.5)';
+            
+            // Efecto de explosión de corazones
+            createHeartExplosion();
+            
+            // Mostrar mensaje especial
+            setTimeout(() => {
+                // Crear mensaje flotante
+                const message = document.createElement('div');
+                message.innerHTML = '💖 TE AMO DEMASIADO, MI PRINCESA 💖';
+                message.style.position = 'fixed';
+                message.style.top = '50%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.background = 'rgba(255, 255, 255, 0.95)';
+                message.style.color = '#ff3366';
+                message.style.padding = '20px 30px';
+                message.style.borderRadius = '15px';
+                message.style.fontSize = '1.5rem';
+                message.style.fontWeight = 'bold';
+                message.style.zIndex = '10000';
+                message.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+                message.style.border = '3px solid #ff66a3';
+                message.style.animation = 'fadeIn 0.5s';
+                
+                document.body.appendChild(message);
+                
+                // Remover mensaje después de 3 segundos
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transform = 'translate(-50%, -50%) scale(0.9)';
+                    message.style.transition = 'all 0.5s';
+                    setTimeout(() => {
+                        if (message.parentNode) message.remove();
+                    }, 500);
+                }, 3000);
+            }, 800);
+            
+            // Restaurar botón después de 3 segundos
+            setTimeout(() => {
+                heartBtn.style.transform = 'scale(1)';
+                heartBtn.style.boxShadow = '';
+                heartBtn.innerHTML = '<i class="fas fa-heartbeat"></i> ¡TE AMO DEMASIADO, MI VIDA!';
+                heartBtn.style.background = 'linear-gradient(135deg, #ff3366, #ff6699)';
+            }, 3000);
+        }
+        
+        function createHeartExplosion() {
+            // Efecto de explosión de corazones
+            const heartEmojis = ['❤️', '💖', '💗', '💓', '💕', '💞', '💘', '💝'];
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.style.position = 'fixed';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = '35px';
+                    heart.style.color = '#ff3366';
+                    heart.style.opacity = '0.9';
+                    heart.style.zIndex = '10000';
+                    heart.style.transform = 'translate(-50%, -50%)';
+                    heart.style.animation = `explodeHeart 2s forwards`;
+                    
+                    const style = document.createElement('style');
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 200 + Math.random() * 150;
+                    const endX = Math.cos(angle) * distance;
+                    const endY = Math.sin(angle) * distance;
+                    
+                    style.textContent = `
+                        @keyframes explodeHeart {
+                            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.9; }
+                            50% { opacity: 1; }
+                            100% { transform: translate(${endX}px, ${endY}px) scale(1); opacity: 0; }
+                        }
+                    `;
+                    
+                    document.head.appendChild(style);
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                        if (style.parentNode) style.remove();
+                    }, 2000);
+                }, i * 100);
             }
         }
         
@@ -561,9 +1283,6 @@
                 document.getElementById('loginCard').style.display = 'block';
             }
             
-            // Corazones iniciales
-            for (let i = 0; i < 8; i++) setTimeout(createSoftHearts, i * 400);
-            
             // Event listeners
             document.getElementById('continueBtn').addEventListener('click', checkName);
             document.getElementById('nameInput').addEventListener('keypress', function(e) {
@@ -572,46 +1291,21 @@
             document.getElementById('letterClosed').addEventListener('click', openLetter);
             document.getElementById('heartBtn').addEventListener('click', createLoveEffect);
             
+            // Efectos en el input
             const nameInput = document.getElementById('nameInput');
             if (nameInput) {
-                nameInput.addEventListener('focus', function() { this.style.transform = 'scale(1.02)'; });
-                nameInput.addEventListener('blur', function() { this.style.transform = 'scale(1)'; });
+                nameInput.addEventListener('focus', function() { 
+                    this.style.transform = 'scale(1.03)';
+                    this.style.boxShadow = '0 0 0 4px rgba(255, 102, 163, 0.3)';
+                });
+                nameInput.addEventListener('blur', function() { 
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '';
+                });
             }
             
-            // Estilos para countdown
-            const countdownStyle = document.createElement('style');
-            countdownStyle.textContent = `
-                .countdown-item {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    min-width: 60px;
-                }
-                .countdown-value {
-                    font-size: 2rem;
-                    font-weight: 700;
-                    color: #ff66a3;
-                    background: white;
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-bottom: 5px;
-                    border: 2px solid #ffc2d1;
-                }
-                .countdown-label {
-                    font-size: 0.8rem;
-                    color: #b76e9a;
-                    font-weight: 600;
-                }
-                @keyframes pulse {
-                    0%, 100% { transform: scale(1); }
-                    50% { transform: scale(1.02); }
-                }
-            `;
-            document.head.appendChild(countdownStyle);
+            // Iniciar corazones
+            startHearts();
         });
     </script>
 </body>
